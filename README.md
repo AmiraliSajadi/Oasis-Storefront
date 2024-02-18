@@ -5,7 +5,7 @@ Project for the CS 530
 ## Setup
 Using a virtual environment is strongly suggested. Navigate to the root folder and:
 
-`virtualenf ./myenv`
+`virtualenv ./myenv`
 
 install the required packages:
 
