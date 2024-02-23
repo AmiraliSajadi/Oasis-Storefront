@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm
 
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ posts = [
 {
     'author': 'Mahi Patel',
     'title': "Blog Post 211",
-    'content': 'Ssecond post content',
+    'content': 'Second post content',
     'date posted': 'April 21, 2018'
 }
 ]
