@@ -1,0 +1,235 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #444444;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #126885;
+    padding: 20px 80px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.06);
+    /* z-index: 999;
+    position:sticky;
+    top: 0;
+    left: 0; */
+}
+
+
+#content {
+    background-image: url("../img/hero4.png");
+    height: 90vh;
+    width: 100%;
+    background-size: cover;
+    background-position: top 25% right 0;
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#content h4 {
+    /* color: #126885; */
+    /* font-size: 2.5rem; */
+padding-bottom: 15px;
+    /* margin-bottom: 20px; */
+}
+
+#content h1 {
+    color: #088178;
+    /* font-size: 3.5rem; */
+    /* margin-bottom: 20px; */
+}
+
+#content button
+{
+    background-image: url("../img/button.png");
+    background-color: transparent;
+    color: #088178;
+    border: 0;
+    padding: 14px 80px 14px 65px;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    cursor:pointer;
+    font-weight: 700;
+    font-size: 15px;
+
+}
+
+.selector-feature {
+    padding: 40px 80px;
+}
+
+#features .card{
+    width: 180px;
+    text-align: center;
+    padding: 25px 15px;
+    border: none;
+    background-color: #fafafa;
+    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    margin: 15px 0;
+
+}
+
+#features .card:hover {
+    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
+
+}
+
+#features .card h6 {
+    display: block;
+    padding: 2px 2px 1px 2px;
+    line-height: 1.5;
+    color: #286561;
+    border-radius: 10px;
+    
+}
+
+#section-banner .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#section-banner .col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    background-image: url("../img/banner/b17.jpg");
+    min-width: 500px;
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    padding: 30px 80px;
+}
+#section-banner .box-2 {
+
+    background-image: url("../img/banner/b10.jpg");
+    
+}
+#section-banner h4 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+#section-banner h2 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 300;
+    /* margin-bottom: 20px; */
+}
+
+#section-banner span {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 15px;
+}
+
+/* #section-banner button */
+button.white{
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 11px 18px;
+    background-repeat: no-repeat;
+    /* border-radius: 5px; */
+    cursor:pointer;
+    font-weight: 600;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s;
+
+}
+
+#section-banner .col-md-6:hover button {
+    background-color: #0e80bd;
+border: 1px solid #0e80bd;
+}
+
+.bg-steel {
+    background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.article-title {
+    color: #444444;
+}
+
+a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
