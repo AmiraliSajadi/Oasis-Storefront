@@ -3,11 +3,6 @@ from app import app
 from app.forms import RegistrationForm, LoginForm
 
 
-posts = [
-    {'author': 'Dhrumil Patel', 'title': "Blog Post 01", 'content': 'First post content', 'date posted': 'April 20, 2018'},
-    {'author': 'Mahi Patel', 'title': "Blog Post 211", 'content': 'Second post content', 'date posted': 'April 21, 2018'}
-]
-
 @app.route("/")
 @app.route("/home")
 def home():
