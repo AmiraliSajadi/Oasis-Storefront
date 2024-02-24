@@ -1,15 +1,49 @@
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 from app import app
+from app.forms import RegistrationForm, LoginForm
 
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+posts = [
+    {'author': 'Dhrumil Patel', 'title': "Blog Post 01", 'content': 'First post content', 'date posted': 'April 20, 2018'},
+    {'author': 'Mahi Patel', 'title': "Blog Post 211", 'content': 'Second post content', 'date posted': 'April 21, 2018'}
+]
 
-@app.route('/user_profile')
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+@app.route("/about")
 def about():
-    return render_template('user_profile.html')
+    return render_template('about.html', title='About')
 
-@app.route('/about_us')
-def about_us():
-    return render_template('about_us.html')
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.Username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.Email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash("Login Unsuccessful. Please check username and password", "danger")
+    return render_template('login.html', title='Login', form=form)
+
+@app.route("/add_to_cart")
+def add_to_cart():
+    return render_template('add_to_cart.html', title='Add to Cart')
+
+@app.route("/sell")
+def sell():
+    return render_template('sell.html', title='Sell')
+
+@app.route("/contact")
+def contact():
+    return render_template('contact.html', title='Contact')
