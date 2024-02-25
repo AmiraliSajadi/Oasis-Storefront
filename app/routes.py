@@ -1,21 +1,15 @@
-from flask import render_template, Flask, redirect, url_for, flash
+from flask import render_template, Flask, redirect, url_for, flash, session, request
 from app import app
 from app.forms import RegistrationForm, LoginForm
 
 
-<<<<<<< HEAD
-posts = [
-    {'author': 'Dhrumil Patel', 'title': "Blog Post 01", 'content': 'First post content', 'date posted': 'April 20, 2018'},
-    {'author': 'Mahi Patel', 'title': "Blog Post 211", 'content': 'Second post content', 'date posted': 'April 21, 2018'}
-]
 
 
-=======
->>>>>>> 8796d3b639fed91b3a2e932f1ab32a28203812cf
+
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', posts=posts)
+    return render_template('home.html')
 
 @app.route("/about")
 def about():
