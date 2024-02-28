@@ -1,8 +1,7 @@
-from flask import render_template, Flask, redirect, url_for, flash, session, request
 from app import app
+from app.models import User, Product, Category, Rating
 from app.forms import RegistrationForm, LoginForm
-
-
+from flask import render_template, redirect, url_for, flash, session, request
 
 
 
@@ -27,7 +26,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.Email.data == 'admin@blog.com' and form.password.data == 'password':
+        if form.Email.data == 'admin@application.com' and form.password.data == 'password':
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
@@ -46,3 +45,9 @@ def sell():
 def contact():
     return render_template('contact.html', title='Contact')
 
+@app.route("/products")
+def products():
+    return render_template('products.html', title='Products')
+
+if __name__ == "__main__":
+    app.run(debug=True)
