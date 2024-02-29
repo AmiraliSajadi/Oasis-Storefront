@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 1px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.side-panel {
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  }
+  
+  .side-panel.open {
+    width: 250px; /* Adjust as needed */
+  }
+  
