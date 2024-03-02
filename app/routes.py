@@ -1,4 +1,4 @@
-from app import app
+from app import app, db, bcrypt
 from app.models import User, Product, Category, Rating
 from app.forms import RegistrationForm, LoginForm
 from flask import render_template, redirect, url_for, flash, session, request
@@ -21,6 +21,13 @@ def register():
         flash(f'Account created for {form.Username.data}!', 'success')
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
+
+# @app.route('/logout')
+# @login_required
+# def logout():
+#     logout_user()
+#     return redirect(url_for('home'))
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -49,5 +56,5 @@ def contact():
 def products():
     return render_template('products.html', title='Products')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
