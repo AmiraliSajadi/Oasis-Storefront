@@ -1,80 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Detail Page</title>
-<style>
-  body { font-family: Arial, sans-serif; }
-  .container { max-width: 1200px; margin: auto; padding: 20px; }
-  .product-image { max-width: 300px; }
-  .product-info { margin-top: 20px; }
-  .product-title { font-size: 24px; font-weight: bold; }
-  .product-price { font-size: 20px; color: green; margin-top: 5px; }
-  .add-to-cart-btn { background-color: #FFA41C; border: none; padding: 10px 20px; font-size: 18px; cursor: pointer; margin-top: 10px; }
-  .product-description { margin-top: 20px; }
-  .customer-reviews { margin-top: 40px; }
-  .recommended-items { margin-top: 50px; }
-  .items-container { display: flex; justify-content: space-between; flex-wrap: wrap; }
-  .item { width: 30%; margin-bottom: 20px; text-align: center; }
-  .item-image { max-width: 100%; height: auto; }
-  .item-name { font-size: 16px; margin-top: 10px; }
-  .item-link { display: inline-block; margin-top: 10px; color: #007bff; text-decoration: none; }
-  .item-link:hover { text-decoration: underline; }
+{%extends "layout.html"%}
 
-</style>
-</head>
-<body>
-
-<div class="container">
-  <!-- Product Image -->
-  <img src="product-image-url.jpg" alt="Product Name" class="product-image">
-
-  <!-- Product Information -->
-  <div class="product-info">
-    <div class="product-title">Product Name</div>
-    <div class="product-price">$19.99</div>
-    <button class="add-to-cart-btn">Add to Cart</button>
-  </div>
-
-  <!-- Product Description -->
-  <div class="product-description">
-    <h3>Product Description</h3>
-    <p>This is where the product description will go. It can be as long or as short as necessary to cover the product's features and benefits.</p>
-  </div>
-
-  <!-- Customer Reviews -->
-  <div class="customer-reviews">
-    <h3>Customer Reviews</h3>
-    <p>Review 1: This product is amazing!</p>
-    <p>Review 2: Really loved this, highly recommend.</p>
-    <!-- More reviews can be added here -->
-  </div>
-
-  <!-- Recommended Items Section -->
-<div class="recommended-items">
-    <h3>Recommended for You</h3>
-    <div class="items-container">
-      <!-- Each item -->
-      <div class="item">
-        <img src="recommended-item1-image-url.jpg" alt="Item 1" class="item-image">
-        <div class="item-name">Item 1</div>
-        <a href="item1-detail-page-url" class="item-link">View Details</a>
+{% block content %}
+<div class="product-details">
+  <div class="container">
+    <!-- Product Info -->
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Product Image -->
+        <img src="product-image-url.jpg" alt="Product Name" class="img-fluid">
       </div>
-      <!-- Repeat for more recommended items -->
-      <div class="item">
-        <img src="recommended-item2-image-url.jpg" alt="Item 2" class="item-image">
-        <div class="item-name">Item 2</div>
-        <a href="item2-detail-page-url" class="item-link">View Details</a>
+      <div class="col-md-6">
+        <h2>Product Name</h2>
+        <p class="price">$19.99</p>
+        <p>Some brief description of the product...</p>
+        <button class="btn btn-primary">Add to Cart</button>
       </div>
-      <div class="item">
-        <img src="recommended-item3-image-url.jpg" alt="Item 3" class="item-image">
-        <div class="item-name">Item 3</div>
-        <a href="item3-detail-page-url" class="item-link">View Details</a>
+    </div>
+
+    <!-- Product Description -->
+    <div class="row">
+      <div class="col">
+        <h3>Description</h3>
+        <p>Here is a more detailed description of the product. It might include its features, benefits, and any other relevant information that a customer would find useful.</p>
       </div>
     </div>
   </div>
 </div>
 
-</body>
-</html>
+<!-- Recommended Items -->
+<div class="recommended-items">
+  <div class="container">
+    <h3>Recommended for You</h3>
+    <div class="row">
+      <!-- Item -->
+      <div class="col-md-4">
+        <div class="item">
+          <img src="recommended-item1-image-url.jpg" alt="Item 1" class="img-fluid">
+          <h4>Item 1 Name</h4>
+          <p>$29.99</p>
+          <a href="#" class="btn btn-outline-primary">View Item</a>
+        </div>
+      </div>
+      <!-- Repeat for other items -->
+    </div>
+  </div>
+</div>
+{% endblock %}
