@@ -28,11 +28,11 @@ function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+    slides[i].style.display = "none";
   }
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  slides[slideIndex-1].style.display = "block";  
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+  slides[slideIndex - 1].style.display = "block";
 }
 
 // Auto Slide
@@ -40,11 +40,11 @@ function autoSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+    slides[i].style.display = "none";
   }
   slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  slides[slideIndex-1].style.display = "block";  
+  if (slideIndex > slides.length) { slideIndex = 1 }
+  slides[slideIndex - 1].style.display = "block";
   setTimeout(autoSlides, 3000); // Change image every 3 seconds
 }
 
@@ -80,3 +80,20 @@ window.addEventListener("scroll", function () {
   window.scrollY >= 200 ? header.classList.add("active")
     : header.classList.remove("active");
 })
+
+
+// Play videos on hover
+
+document.addEventListener('DOMContentLoaded', () => {
+  const videos = document.querySelectorAll('.product-video');
+
+  videos.forEach(video => {
+    video.addEventListener('mouseenter', () => {
+      video.play();
+    });
+    video.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+});
