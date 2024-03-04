@@ -1,4 +1,63 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a,
+img,
+span,
+input,
+button,
+ion-icon {
+    display: block;
+}
+
+input,
+button {
+    background: none;
+    border: none;
+    font: inherit;
+}
+
+button {
+    text-align: left;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+    outline-color: hsl(176, 35%, 63%);
+}
+
+img {
+    height: auto;
+}
+
+ion-icon {
+    pointer-events: none;
+}
+
+html {
+    font-family: "Jost", sans-serif;
+    color: hsl(0, 0%, 44%);
+    scroll-behavior: smooth;
+}
+
+
+
 body {
+    padding-block: 70px;
     background: #fafafa;
     color: #333333;
     margin-top: 5rem;
@@ -7,28 +66,371 @@ body {
     min-height: 100vh;
 }
 
+a,
+button {
+    transition: 0.25 ease;
+}
+
+h3>a {
+    color: inherit;
+}
+
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    color: #444444;
+    color: hsl(0, 0%, 9%);
 }
 
-header {
+.btn {
+    background: var(--background, hsl(0, 0%, 9%));
+    color: var(--color, hsl(0, 0%, 100%));
+    font-weight: 600;
+    height: var(--height, 60px);
+    padding-inline: 50px;
+    border: 1px solid var(--border-color, hsl(0, 0%, 9%));
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary:is(:hover, :focus) {
+    --background: hsl(0, 0%, 100%);
+    --color: hsl(0, 0%, 9%);
+    --border-color: hsl(0, 0%, 9%);
+}
+
+.btn-secondary {
+    --height: 50px;
+    --background: hsl(0, 0%, 100%);
+    --color: hsl(0, 0%, 9%);
+    --border-color: hsl(0, 0%, 100%);
+}
+
+.btn-secondary:is(:hover, :focus) {
+    --background: hsl(0, 0%, 9%);
+    --color: hsl(0, 0%, 100%);
+    --border-color: hsl(0, 0%, 9%);
+}
+
+.btn-outline {
+    --height: 50px;
+    --background: hsl(0, 0%, 100%);
+    --color: hsl(0, 0%, 9%);
+    --border-color: hsl(0, 0%, 9%);
+    padding-inline: 40px;
+}
+
+.btn-outline:is(:hover, :focus) {
+    --background: hsl(0, 0%, 9%);
+    --color: hsl(0, 0%, 100%);
+    --border-color: hsl(0, 0%, 9%);
+}
+
+.section {
+    padding-block: 60px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #126885;
     padding: 20px 80px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.06);
-    /* z-index: 999;
+    z-index: 999;
     position:sticky;
     top: 0;
-    left: 0; */
+    left: 0; 
+} */
+
+
+
+
+.container {
+    padding-inline: 15px;
 }
 
+/* navigation Bar */
+.header-search {
+    display: none;
+}
+
+
+.header {
+    position: absolute;
+    display: flex;
+    top: 0%;
+    left: 0%;
+    background: #ffffff;
+    width: 100%;
+    z-index: 4;
+    align-items: center;
+    padding-block: 20px;
+    transition: 0.25s ease;
+    /* margin-bottom: 67px; */
+}
+
+.header.active {
+    position: fixed;
+    box-shadow: 0 2px 20px hsla(0, 0%, 0%, 0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+
+
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.nav-open-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+}
+
+.nav-open-btn span {
+    width: 20px;
+    height: 2px;
+    background: hsl(0, 0%, 0%);
+    transition: 0.25s ease;
+}
+
+.nav-open-btn span:nth-child(2) {
+    transform: scaleX(0.5);
+    transform-origin: right;
+}
+
+.nav-open-btn:is(:hover, :focus) span:nth-child(2) {
+    transform: scaleX(1);
+}
+
+
+/* --------------------- */
+
+.header-actions {
+    background: hsl(0, 0%, 100%);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5px;
+    padding-block: 16px 10px;
+    box-shadow: 0 -2px 20px hsla(0, 0%, 0%, 0.1);
+    z-index: 1;
+}
+
+.header-action-btn {
+    position: relative;
+    width: 50px;
+    text-align: center;
+}
+
+.header-action-btn ion-icon {
+    margin-inline: auto;
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.header-action-label {
+    color: hsl(0, 0%, 44%);
+    font-size: var(--fs-10);
+    transition: 0.25s ease;
+}
+
+.header-action-btn:is(:hover, :focus) .header-action-label {
+    color: hsl(0, 0%, 9%);
+}
+
+.header-action-btn .btn-badge {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    background: var(--background, hsl(0, 0%, 9%));
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    line-height: 0;
+    font-size: 13px;
+    color: hsl(0, 0%, 100%);
+    border-radius: 50%;
+}
+
+.header-search {
+    display: block;
+    position: relative;
+    width: max-content;
+}
+
+.header-search .input-field {
+    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    width: 280px;
+    padding: 12px 30px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.header-search .input-field:focus {
+    outline: 1px solid hsl(0, 0%, 9%);
+}
+
+.header-search .search-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: hsl(0, 0%, 9%);
+    ;
+}
+
+.header-search .search-btn ion-icon {
+    --ionicon-stroke-width: 30px;
+}
+
+/* .header .logo {
+    margin-inline: auto;
+} */
+
+
+.header-action-btn .btn-badge.green {
+    --background: hsl(176, 35%, 63%);
+}
+
+.navbar {
+    background: hsl(0, 0%, 100%);
+    position: fixed;
+    top: 0;
+    right: -300px;
+    max-width: 300px;
+    width: 100%;
+    height: 100%;
+    padding: 30px 25px;
+    z-index: 3;
+    visibility: hidden;
+    transition: 0.25s cubic-bezier(0.51, 0.03, 0.64, 0.28);
+}
+
+.navbar.active {
+    visibility: visible;
+    transform: translateX(-300px);
+    transition: 0.5s cubic-bezier(0.33, 0.85, 0.56, 1.02);
+}
+
+.navbar.active {
+    visibility: visible;
+    transform: translateX(-300px);
+    transition: 0.5s cubic-bezier(0.33, 0.85, 0.56, 1.02);
+}
+
+
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.nav-close-btn ion-icon {
+    font-size: 23px;
+}
+
+.navbar-link {
+    padding-block: 10px;
+    color: hsl(0, 0%, 9%);
+}
+
+
+.navbar-list > li:not(:last-child) { border-bottom: 1px solid hsl(0, 0%, 96%); }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: hsl(0, 0%, 0%);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 2;
+}
+
+.overlay.active {
+  opacity: 0.7;
+  pointer-events: all;
+}
+
+
+
+
+.nav-open-btn,
+.header-action-btn:nth-child(2),
+.navbar-top,
+.overlay {
+    display: none;
+}
+
+.header-actions {
+    all: unset;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar {
+    all: unset;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    width: 100%;
+    background: hsl(0, 0%, 100%);
+}
+
+.header.active .navbar {
+    position: fixed;
+    top: 0;
+    box-shadow: 0 2px 20px hsla(0, 0%, 0%, 0.1);
+}
+
+.navbar-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar-list>li:not(:last-child) {
+    border-bottom: none;
+}
+
+.navbar-link {
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding-block: 20px;
+}
+
+.navbar-link:is(:hover, :focus) {
+    color: hsl(176, 35%, 63%);
+}
 
 #content {
     background-image: url("../img/hero4.png");
@@ -256,7 +658,7 @@ a.article-title:hover {
     width: 100%;
 }
 
-#product-description .multicard{
+#product-description .multicard {
     display: flex;
     justify-content: space-between;
     /* align-items: center; */
@@ -292,6 +694,7 @@ a.article-title:hover {
     text-align: start;
     padding: 10px 0;
 }
+
 #product-description .product-info {
     margin-top: 5px;
     color: #606063;
@@ -299,13 +702,13 @@ a.article-title:hover {
 
 }
 
-#product-description .product-name h5{
+#product-description .product-name h5 {
     padding: 0px;
     font-size: 20px;
     color: #1a1a1a;
 }
 
-#product-description .star{
+#product-description .star {
     font-size: 12px;
     color: rgb(243, 181, 25);
 

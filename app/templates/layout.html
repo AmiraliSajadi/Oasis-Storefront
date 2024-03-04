@@ -18,108 +18,106 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <section id="header">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-      <div class="container">
-        <a class="navbar-brand mr-4" href="{{url_for('home')}}">Oasis</a>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <ul id="nav-left" class="navbar-nav">
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{{url_for('home')}}">Home</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('about')}}">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
-              </li>
-            </ul>
+  <header class="header" data-header>
+    <div class="container">
 
-          </div>
-          <div class="navbar-nav ">
-            <ul id="nav-right" class="navbar-nav">
-              <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search anything" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </ul>
-          </div>
+      <div class="overlay" data-overlay></div>
 
-          <!-- Navbar Right Side -->
-          <div class="navbar-nav">
-            <ul id="nav-right" class="navbar-nav">
-              <!-- <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search anything" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-              </form> -->
+      <a href="{{url_for('home')}}" class="logo">
+        <img src="../static/img/logo.png" alt="Oasis logo" width="130" height="11">
+      </a>
 
-              <li class="nav-item" id="signInLink">
-                <button class="btn my-2 my-sm-0">Sign in</button>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('add_to_cart')}}"><i class="solid fa-cart-shopping"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('sell')}}">Sell</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('products')}}">Products</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="header-search">
+        <input type="search" name="search" placeholder="Search Product..." class="input-field">
+
+        <button class="search-btn" aria-label="Search">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
       </div>
-    </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <!-- <a class="navbar-brand" href="/">Oasis</a> -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <div class="header-actions">
+
+        <button class="header-action-btn" id="signInLink">
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Sign in</p>
+        </button>
+
+        <button class="header-action-btn">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Search</p>
+        </button>
+
+        <button class="header-action-btn">
+          <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Cart</p>
+
+          <!-- <div class="btn-badge green" aria-hidden="true">3</div> -->
+        </button>
+
+        <button class="header-action-btn">
+          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Wishlist</p>
+
+          <!-- <div class="btn-badge" aria-hidden="true">2</div> -->
+        </button>
+
+      </div>
+
+      <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Categories
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <!-- Dropdown items here -->
-            </div>
+
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+
+          <a href="{{url_for('home')}}" class="logo">
+            <img src="../static/img/logo.png" alt="Casmart logo" width="130" height="31">
+          </a>
+
+          <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <ul class="navbar-list">
+
+          <li>
+            <a href="{{url_for('home')}}" class="navbar-link">Home</a>
           </li>
+
+          <li>
+            <a href="#" class="navbar-link">Shop</a>
+          </li>
+
+          <li>
+            <a href="{{url_for('about')}}" class="navbar-link">About</a>
+          </li>
+
+          <li>
+            <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
+          </li>
+
+          <li>
+            <a href="{{url_for('sell')}}" class="navbar-link">Sell</a>
+          </li>
+
         </ul>
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search anything" aria-label="Search">
-          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
 
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa fa-user"></i> John Doe <!-- Replace John Doe with user's name or "Sign in" -->
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-primary" href="#">Sell</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa fa-shopping-cart"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      </nav>
 
+    </div>
+  </header>
 
-
-  <!-- Main Section -->
-  </section>
+  <!-- Header -->
+ 
 
   <div id="main" role="main" class="achor">
 
