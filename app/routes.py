@@ -69,3 +69,13 @@ def contact():
 @app.route("/products")
 def products():
     return render_template('products.html', title='Products')
+
+
+@app.route("/product_details")
+def productsDetails():
+    return render_template('product_details.html', title='ProductsD')
+
+
+@app.route("/user_profile")
+def userProfile():
+    return render_template('user_profile.html', title='User Profile')
