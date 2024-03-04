@@ -1,5 +1,47 @@
 {% extends "layout.html"%}
 
+
+{%block main_content%}
+
+<!-- <main> -->
+  <article>
+<div class="slideshow-container">
+  <div class="mySlides fade">
+    <img src="../static/img/img-slider/Dell-Homepage-Banner.jpg" style="width:100%; height:700px;">
+    <div class="text">Dell Laptop</div>
+  </div>
+  <div class="mySlides fade">
+    <img src="../static/img/img-slider/ipad.png" style="width:100%; height:700px;">
+    <div class="text">Apple Ipad</div>
+  </div>
+  <div class="mySlides fade">
+    <img src="../static/img/img-slider/Top-games-and-Immortal-headphones.jpg" style="width:100%; height:700px;">
+    <div class="text">Headphones</div>
+  </div>
+  <div class="mySlides fade">
+    <img src="../static/img/img-slider/watch.png" style="width:100%; height:700px;">
+    <div class="text">Apple Watch</div>
+  </div>
+  
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+  </div>
+  <br>
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+  </div>
+</article>
+<!-- </main> -->
+
+{%endblock main_content%}
+
+
+<!-- 
 {% block content%}
 <section id="content">
 
@@ -79,7 +121,7 @@
         <h4>Crazy Deals</h4>
         <h2>Buy 1 Get 1 Free!</h2>
         <span>On all products</span>
-        <!-- <span>The best is on Sale</span> -->
+        <span>The best is on Sale</span>
         <button class="white">Shop Now</button>
 
       </div>
@@ -87,7 +129,7 @@
         <h4>Eye Catching</h4>
         <h2>Upcoming Season</h2>
         <span>The best is on sale</span>
-        <!-- <span>The best is on Sale</span> -->
+        <span>The best is on Sale</span>
         <button class="white">Grab Now!</button>
 
       </div>
@@ -95,6 +137,4 @@
   </div>
 </div>
 
-
-
-{% endblock SectionBanner %}
+{% endblock SectionBanner %} -->

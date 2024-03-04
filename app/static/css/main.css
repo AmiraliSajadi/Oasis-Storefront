@@ -14,15 +14,6 @@ a {
     text-decoration: none;
 }
 
-a,
-img,
-span,
-input,
-button,
-ion-icon {
-    display: block;
-}
-
 input,
 button {
     background: none;
@@ -40,8 +31,9 @@ input {
     outline-color: hsl(176, 35%, 63%);
 }
 
-img {
+.logo img {
     height: auto;
+    vertical-align: middle;
 }
 
 ion-icon {
@@ -60,7 +52,7 @@ body {
     padding-block: 70px;
     background: #fafafa;
     color: #333333;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -144,24 +136,111 @@ h6 {
     margin-bottom: 30px;
 }
 
-/* header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #126885;
-    padding: 20px 80px;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.06);
-    z-index: 999;
-    position:sticky;
+#hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.myslides {
+    display: none;
+}
+
+.slideshow-container{
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+
+}
+.prev, .next{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.next{
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.text{
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+.numbertext{
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
     top: 0;
-    left: 0; 
-} */
+}
+
+.dot{
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover{
+    background-color: #717171;
+}
+
+.fade{
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade{
+    from {opacity: .4}
+    to {opacity: 1}
+}
+@keyframes fade{
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px){
+    .prev, .next, .text{
+        font-size: 11px;
+    }
+    .dot{
+        height: 8px;
+        width: 8px;
+    }
+
+    /* .slideshow-container{
+        max-width: 100%;
+    } */
+}
 
 
 
 
 .container {
     padding-inline: 15px;
+
 }
 
 /* navigation Bar */
@@ -169,6 +248,9 @@ h6 {
     display: none;
 }
 
+.main-container{
+    padding-top: 150px;
+}
 
 .header {
     position: absolute;
@@ -181,6 +263,8 @@ h6 {
     align-items: center;
     padding-block: 20px;
     transition: 0.25s ease;
+    
+    
     /* margin-bottom: 67px; */
 }
 
@@ -361,21 +445,23 @@ h6 {
 }
 
 
-.navbar-list > li:not(:last-child) { border-bottom: 1px solid hsl(0, 0%, 96%); }
+.navbar-list>li:not(:last-child) {
+    border-bottom: 1px solid hsl(0, 0%, 96%);
+}
 
 .overlay {
-  position: fixed;
-  inset: 0;
-  background: hsl(0, 0%, 0%);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.25s ease;
-  z-index: 2;
+    position: fixed;
+    inset: 0;
+    background: hsl(0, 0%, 0%);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease;
+    z-index: 2;
 }
 
 .overlay.active {
-  opacity: 0.7;
-  pointer-events: all;
+    opacity: 0.7;
+    pointer-events: all;
 }
 
 
@@ -433,7 +519,7 @@ h6 {
 }
 
 #content {
-    background-image: url("../img/hero4.png");
+    /* background-image: url("../img/hero4.png"); */
     height: 90vh;
     width: 100%;
     background-size: cover;
