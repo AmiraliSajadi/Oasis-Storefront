@@ -73,7 +73,7 @@ def products():
 
 @app.route("/product_details")
 def productsDetails():
-    return render_template('product_details.html', title='ProductsD')
+    return render_template('product_details.html', title='Products Details')
 
 
 @app.route("/user_profile")

@@ -21,25 +21,34 @@ class MyUser(db.Model):
         return '<MyUser {}>'.format(self.username)
 
 
-# class Product(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(128), index=True)
-#     description = db.Column(db.Text)
-#     price = db.Column(db.Float)
-#     seller_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-#     ratings = db.relationship('Rating', backref='product', lazy='dynamic')
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    short_description = db.Column(db.Text)
+    full_description = db.Column(db.Text)
+    price = db.Column(db.Float)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
-#     def __repr__(self):
-#         return '<Product {}>'.format(self.name)
+    def __repr__(self):
+        return '<Product {}>'.format(self.name)
 
-# class Category(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(64), index=True, unique=True)
-#     products = db.relationship('Product', backref='category', lazy='dynamic')
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), index=True, unique=True)
+    description = db.Column(db.Text)
+    products = db.relationship('Product', backref='category', lazy='dynamic')
 
-#     def __repr__(self):
-#         return '<Category {}>'.format(self.name)
+    def __repr__(self):
+        return '<Category {}>'.format(self.name)
+
+class ProductDetails(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    image_url = db.Column(db.String(256))
+    # Add more details as needed
+
+    def __repr__(self):
+        return '<ProductDetails {}>'.format(self.id)
 
 # class Rating(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
