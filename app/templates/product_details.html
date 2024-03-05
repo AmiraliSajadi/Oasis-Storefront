@@ -1,4 +1,4 @@
-{%extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block content %}
 <div class="product-details">
@@ -7,12 +7,12 @@
     <div class="row">
       <div class="col-md-6">
         <!-- Product Image -->
-        <img src="product-image-url.jpg" alt="Product Name" class="img-fluid">
+        <!-- <img src="{{ product_detail.image_url }}" alt="{{ product_detail.name }}" class="img-fluid"> -->
       </div>
       <div class="col-md-6">
-        <h2>Product Name</h2>
-        <p class="price">$19.99</p>
-        <p>Some brief description of the product...</p>
+        <h2>{{ product_detail.name }}</h2>
+        <p class="price">${{ product_detail.price }}</p>
+        <p>{{ product_detail.short_description }}</p>
         <button class="btn btn-primary">Add to Cart</button>
       </div>
     </div>
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col">
         <h3>Description</h3>
-        <p>Here is a more detailed description of the product. It might include its features, benefits, and any other relevant information that a customer would find useful.</p>
+        <p>{{ product_detail.full_description }}</p>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
       <!-- Item -->
       <div class="col-md-4">
         <div class="item">
-          <img src="recommended-item1-image-url.jpg" alt="Item 1" class="img-fluid">
+          <!-- <img src="recommended-item1-image-url.jpg" alt="Item 1" class="img-fluid"> -->
           <h4>Item 1 Name</h4>
           <p>$29.99</p>
           <a href="#" class="btn btn-outline-primary">View Item</a>

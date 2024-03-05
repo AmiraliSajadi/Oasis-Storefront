@@ -1,7 +1,7 @@
 from app import app, db
 from flask_bcrypt import Bcrypt
-from app.models import MyUser
 from app.forms import RegistrationForm, LoginForm
+from app.models import MyUser, Product, Category, ProductDetails
 from flask import render_template, redirect, url_for, flash, session, request
 
 
@@ -71,9 +71,14 @@ def products():
     return render_template('products.html', title='Products')
 
 
-@app.route("/product_details")
+@app.route("/product_details", methods=['GET'])
 def productsDetails():
-    return render_template('product_details.html', title='Products Details')
+    product_detail = ProductDetails.query.filter_by(id=1).first()
+    # Pass the product_detail to the template
+    # print(product_detail.price)
+    # print(product_detail.name)
+    # print(product_detail.id)
+    return render_template('product_details.html', title='Product Details', product_detail=product_detail)
 
 
 @app.route("/user_profile")
