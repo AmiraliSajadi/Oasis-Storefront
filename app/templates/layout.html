@@ -52,13 +52,10 @@
           <p class="header-action-label">Search</p>
         </button>
 
-        <button class="header-action-btn">
+        <button class="header-action-btn" data-toggle="modal" data-target="#cartModal" id="cartButton">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
-
           <p class="header-action-label">Cart</p>
-
-          <!-- <div class="btn-badge green" aria-hidden="true">3</div> -->
-        </button>
+        </button>        
 
         <button class="header-action-btn">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
@@ -253,6 +250,29 @@
       </div>
     </div>
 
+    <!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="cartContents">0 items</p>
+        <p id="cartTotal">Total: $0</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
     <!-- </article> -->
 
   <!-- </main> -->
@@ -267,6 +287,30 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="../static/js/modal.js"></script>
+  <script>
+    // Sample cart items array
+    let cartItems = []; // This would be dynamically updated based on actual cart operations
+    
+    document.getElementById('cartButton').addEventListener('click', function() {
+      var cartWindow = document.getElementById('cartWindow');
+      var cartContentsElement = document.getElementById('cartContents');
+      var cartTotalElement = document.getElementById('cartTotal');
+      var totalValue = cartItems.reduce((acc, item) => acc + item.price, 0);
+    
+      // Update cart window content
+      if (cartItems.length > 0) {
+        let itemsList = cartItems.map(item => `${item.name} - $${item.price}`).join('<br>');
+        cartContentsElement.innerHTML = `Items:<br>${itemsList}`;
+        cartTotalElement.innerHTML = `Total: $${totalValue}`;
+      } else {
+        cartContentsElement.innerHTML = "0 items";
+        cartTotalElement.innerHTML = "Total: $0";
+      }
+    
+      // Toggle display of cart window
+      cartWindow.style.display = cartWindow.style.display === 'none' ? 'block' : 'none';
+    });
+    </script>
 </body>
 
 </html>

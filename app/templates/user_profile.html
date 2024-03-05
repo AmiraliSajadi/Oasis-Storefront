@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 <div class="user-profile">
     <div class="user-image">
       <img src="path/to/user/image.jpg" alt="User Name">
@@ -13,6 +13,37 @@
         <span class="star">&#9734;</span> <!-- Empty star -->
         <span class="star">&#9734;</span> <!-- Empty star -->
       </div>
+      <div class="user-sales">
+        <h2>Items for Sale</h2>
+        <div class="sales-items">
+          <!-- Dynamically populate this area with items the user is selling -->
+          <div class="item">
+            <img src="path/to/item/image.jpg" alt="Item Name">
+            <h3 class="item-name">Item Name</h3>
+            <p class="item-price">$Price</p>
+            <p class="item-description">Description of the item.</p>
+          </div>
+          <div class="item">
+            <img src="path/to/item/image.jpg" alt="Item Name">
+            <h3 class="item-name">Item Name</h3>
+            <p class="item-price">$Price</p>
+            <p class="item-description">Description of the item.</p>
+          </div>
+          <div class="item">
+            <img src="path/to/item/image.jpg" alt="Item Name">
+            <h3 class="item-name">Item Name</h3>
+            <p class="item-price">$Price</p>
+            <p class="item-description">Description of the item.</p>
+          </div>
+          <div class="item">
+            <img src="path/to/item/image.jpg" alt="Item Name">
+            <h3 class="item-name">Item Name</h3>
+            <p class="item-price">$Price</p>
+            <p class="item-description">Description of the item.</p>
+          </div>
+          <!-- Repeat for each item -->
+        </div>
+      </div>      
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           const stars = document.querySelectorAll('.star-rating .star');
