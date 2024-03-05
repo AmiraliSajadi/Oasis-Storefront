@@ -1,4 +1,5 @@
 from app import app, db
+from sqlalchemy import text
 from flask_bcrypt import Bcrypt
 from app.forms import RegistrationForm, LoginForm
 from app.models import MyUser, Product, Category, ProductDetails
@@ -73,12 +74,14 @@ def products():
 
 @app.route("/product_details", methods=['GET'])
 def productsDetails():
-    product_detail = ProductDetails.query.filter_by(id=1).first()
-    # Pass the product_detail to the template
-    # print(product_detail.price)
-    # print(product_detail.name)
-    # print(product_detail.id)
-    return render_template('product_details.html', title='Product Details', product_detail=product_detail)
+    # Define the SQL query
+    sql_query = text("SELECT * FROM product_details WHERE id = :id")
+    
+    # Execute the SQL query with parameters
+    product_detail = db.session.execute(sql_query, {'id': 5}).fetchone()
+    print(f"PRODUCT OVER HERE:{product_detail}")
+    
+    return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
 
 @app.route("/user_profile")

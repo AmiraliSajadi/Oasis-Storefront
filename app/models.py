@@ -20,17 +20,25 @@ class MyUser(db.Model):
     def __repr__(self):
         return '<MyUser {}>'.format(self.username)
 
-
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    quantity = db.Column(db.Integer)  # Number of products in stock
+    product_details = db.relationship('ProductDetails', backref='product', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Product {}>'.format(self.id)
+
+class ProductDetails(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    price = db.Column(db.Float)
     short_description = db.Column(db.Text)
     full_description = db.Column(db.Text)
-    price = db.Column(db.Float)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
     def __repr__(self):
-        return '<Product {}>'.format(self.name)
+        return '<ProductDetails {}>'.format(self.name)
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,15 +48,6 @@ class Category(db.Model):
 
     def __repr__(self):
         return '<Category {}>'.format(self.name)
-
-class ProductDetails(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-    image_url = db.Column(db.String(256))
-    # Add more details as needed
-
-    def __repr__(self):
-        return '<ProductDetails {}>'.format(self.id)
 
 # class Rating(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
