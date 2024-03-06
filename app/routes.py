@@ -71,15 +71,10 @@ def contact():
 def products():
     return render_template('products.html', title='Products')
 
-
-@app.route("/product_details", methods=['GET'])
-def productsDetails():
-    # Define the SQL query
+@app.route("/product_details/<int:id>", methods=['GET'])
+def productsDetails(id):
     sql_query = text("SELECT * FROM product_details WHERE id = :id")
-    
-    # Execute the SQL query with parameters
-    product_detail = db.session.execute(sql_query, {'id': 5}).fetchone()
-    print(f"PRODUCT OVER HERE:{product_detail}")
+    product_detail = db.session.execute(sql_query, {'id': id}).fetchone()
     
     return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
