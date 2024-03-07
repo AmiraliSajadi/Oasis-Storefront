@@ -1,0 +1,33 @@
+-- -- Some Sample queries you can use to populate your database with 4 itmes
+
+-- Insert categories
+INSERT INTO category (name, description)
+VALUES 
+    ('Electronics', 'Electronic devices and gadgets'),
+    ('Clothing', 'Clothing items and accessories');
+	
+-- -- Display the category table
+SELECT * FROM category
+
+-- Insert products
+INSERT INTO product (category_id, quantity)
+VALUES 
+    (1, 10),
+    (1, 20),
+    (2, 50),
+    (2, 30);
+
+-- Display the product table
+SELECT * FROM product
+
+-- Insert product details
+INSERT INTO product_details (name, price, short_description, full_description, image_url, category_id)
+VALUES 
+    ('Laptop', 999.99, 'Powerful laptop for all your computing needs', 'This laptop comes with a high-resolution display, fast processor, and ample storage.', '../static/img/uploads/product_img_1.jpg', 1),
+    ('Smartphone', 699.99, 'Cutting-edge smartphone with advanced features', 'The latest smartphone model with a stunning camera, long battery life, and fast performance.', '../static/img/uploads/product_img_1.jpg', 1),
+    ('T-shirt', 19.99, 'Comfortable cotton T-shirt for everyday wear', 'This T-shirt is made from soft, breathable cotton and features a classic design that pairs well with any outfit.', '../static/img/uploads/product_img_2.jpg', 2),
+    ('Jeans', 39.99, 'Classic denim jeans for a timeless look', 'These jeans are crafted from durable denim and feature a relaxed fit that provides all-day comfort.', '../static/img/uploads/product_img_2.jpg', 2);
+
+
+-- View products details table
+SELECT * FROM product_details
