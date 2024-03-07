@@ -50,7 +50,42 @@ function autoSlides() {
 
 autoSlides(); // Start the automatic slideshow
 
+let cart = []; // Initialize an empty cart
 
+// Function to add product to cart
+function addToCart(productId) {
+  // Assuming product details are fetched or already available
+  const product = { id: productId, name: "Product Name", price: 100 }; // Example product
+  cart.push(product);
+  updateCartModal();
+}
+
+// Function to remove product from cart
+function removeFromCart(productId) {
+  cart = cart.filter(product => product.id !== productId);
+  updateCartModal();
+}
+
+// Function to update cart modal view
+function updateCartModal() {
+  let cartItemsContainer = document.getElementById('cartItemsContainer');
+  cartItemsContainer.innerHTML = ''; // Clear current cart items
+  
+  cart.forEach(product => {
+    let itemElement = document.createElement('div');
+    itemElement.innerHTML = `
+      <p>${product.name} - $${product.price} <button onclick="removeFromCart(${product.id})">Remove</button></p>
+    `;
+    cartItemsContainer.appendChild(itemElement);
+  });
+
+  // Update total
+  let total = cart.reduce((sum, product) => sum + product.price, 0);
+  document.getElementById('cartTotal').innerText = `Total: $${total}`;
+}
+
+// Event listener for cart modal open
+document.getElementById('cartButton').addEventListener('click', updateCartModal);
 
 
 // navbar toggle
