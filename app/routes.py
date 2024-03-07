@@ -2,7 +2,7 @@ from app import app, db
 from sqlalchemy import text
 from flask_bcrypt import Bcrypt
 from app.forms import RegistrationForm, LoginForm
-from app.models import MyUser, Product, Category, ProductDetails
+from app.models import MyUser, Product, Category
 from flask import render_template, redirect, url_for, flash, session, request
 
 
@@ -69,11 +69,21 @@ def contact():
 
 @app.route("/products")
 def products():
-    return render_template('products.html', title='Products')
+    all_products = Product.query.all()
+    
+    products_data = [{
+        'name': product.name,
+        'price': product.price,
+        'short_description': product.short_description,
+        'image_url': product.image_url,
+        'quantity': product.quantity
+    } for product in all_products]
+    
+    return render_template('products.html', title='Products', products=products_data)
 
 @app.route("/product_details/<int:id>", methods=['GET'])
 def productsDetails(id):
-    sql_query = text("SELECT * FROM product_details WHERE id = :id")
+    sql_query = text("SELECT * FROM product WHERE id = :id")
     product_detail = db.session.execute(sql_query, {'id': id}).fetchone()
     return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
