@@ -75,7 +75,6 @@ def products():
 def productsDetails(id):
     sql_query = text("SELECT * FROM product_details WHERE id = :id")
     product_detail = db.session.execute(sql_query, {'id': id}).fetchone()
-    
     return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
 

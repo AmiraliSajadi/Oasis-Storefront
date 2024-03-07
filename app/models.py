@@ -35,6 +35,7 @@ class ProductDetails(db.Model):
     price = db.Column(db.Float)
     short_description = db.Column(db.Text)
     full_description = db.Column(db.Text)
+    image_url = db.Column(db.String(256))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
     def __repr__(self):
