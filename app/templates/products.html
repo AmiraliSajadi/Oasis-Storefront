@@ -6,7 +6,7 @@
 
     <div class="multicard">
         {% for product in products %}
-        <div class="product-card">
+        <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
             <img src="{{ product.image_url }}" alt="{{ product.name }}">
             <div class="product-info">
                 <span class="product-brand">{{ product.category }}</span>  <!-- Assuming category is included in product data -->
@@ -27,5 +27,11 @@
     </div>
 
 </section>
+
+<script>
+    function redirectToProductDetails(productId) {
+        window.location.href = "/product_details/" + productId;
+    }
+</script>
 
 {% endblock %}

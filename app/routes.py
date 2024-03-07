@@ -2,7 +2,7 @@ from app import app, db
 from sqlalchemy import text
 from flask_bcrypt import Bcrypt
 from app.forms import RegistrationForm, LoginForm
-from app.models import MyUser, Product, Category
+from app.models import User, Product, Category
 from flask import render_template, redirect, url_for, flash, session, request
 
 
@@ -72,6 +72,7 @@ def products():
     all_products = Product.query.all()
     
     products_data = [{
+        'id' : product.id,
         'name': product.name,
         'price': product.price,
         'short_description': product.short_description,
