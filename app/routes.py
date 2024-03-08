@@ -77,12 +77,6 @@ def login():
 def add_to_cart():
     return render_template('add_to_cart.html', title='Add to Cart')
 
-
-
-@app.route("/contact")
-def contact():
-    return render_template('contact.html', title='Contact')
-
 @app.route("/products")
 def products():
     # page = request.args.get('page', 1, type=int)
