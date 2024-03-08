@@ -112,6 +112,10 @@ def productsDetails(id):
 def userProfile():
     return render_template('userProfile.html', title='User Profile')
 
+@app.route("/user_settings")
+def userSetting():
+    return render_template('user_settings.html', title='User Settings')
+
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
