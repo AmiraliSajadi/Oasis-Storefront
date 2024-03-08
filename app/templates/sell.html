@@ -1,141 +1,35 @@
-{% extends "layout.html"%}
-{% block content%}
+{% extends "layout.html" %}
 
-<div class="content-section">
-    <form method="post" action="">
-        {{ form.hidden_tag()}}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Sell Product</legend>
-
-            <div class="form-group">
-                {{form.name.label(class="form-control-label")}}
-                {% if form.name.errors %}
-                {{form.name(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.name.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.name(class="form-control form-control-lg")}}
-                {% endif %}
-
-            </div>
-            <div class="form-group">
-                {{form.price.label(class="form-control-label")}}
-
-                {% if form.price.errors %}
-                {{form.price(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.price.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.price(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>
-
-
-            <div class="form-group">
-                {{form.shortdesc.label(class="form-control-label")}}
-
-                {% if form.shortdesc.errors %}
-                {{form.shortdesc(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.shortdesc.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.shortdesc(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>
-            <div class="form-group">
-                {{form.fulldesc.label(class="form-control-label")}}
-
-                {% if form.fulldesc.errors %}
-                {{form.fulldesc(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.fulldesc.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.fulldesc(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>
-            <div class="form-group">
-                {{form.img_url.label(class="form-control-label")}}
-
-                {% if form.img_url.errors %}
-                {{form.img_url(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.img_url.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.img_url(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>
-            <div class="form-group">
-                {{form.category_id.label(class="form-control-label")}}
-
-                {% if form.category_id.errors %}
-                {{form.category_id(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.category_id.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.category_id(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>
-            <div class="form-group">
-                {{form.quantity.label(class="form-control-label")}}
-
-                {% if form.quantity.errors %}
-                {{form.quantity(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {% for error in form.quantity.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.quantity(class="form-control form-control-lg")}}
-                {% endif %}
-
-
-            </div>shortdesc
-
-
-
-
-
-
-
-        </fieldset>
-        <div class="form=group">
-            {{form.submit(class="btn btn-outline-info")}}
-
-
-        </div>
-
-
-    </form>
-
+{% block main_content %}
+<div class="container mt-5">
+  <h2>Sell Your Item</h2>
+  <form id="sellItemForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="productImages">Product Images</label>
+      <input type="file" class="form-control-file" id="productImages" name="productImages" accept="image/*" multiple required>
+      <small class="form-text text-muted">Upload at least 3 images of your product.</small>
+    </div>
+    <div class="form-group">
+      <label for="productName">Name of the Product</label>
+      <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name" required>
+    </div>
+    <div class="form-group">
+      <label for="productDescription">Description of the Product</label>
+      <textarea class="form-control" id="productDescription" name="productDescription" rows="3" placeholder="Enter product description" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="productCategory">Product Category</label>
+      <select class="form-control" id="productCategory" name="productCategory" required>
+        <option value="">Select a category</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="home_garden">Home & Garden</option>
+        <option value="sports">Sports</option>
+        <option value="toys">Toys</option>
+        <!-- Add other categories as needed -->
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
-
-{%endblock%}
+{% endblock %}
