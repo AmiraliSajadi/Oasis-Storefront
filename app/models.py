@@ -6,51 +6,22 @@ from flask_login import UserMixin
 def load_user(user_id):
     return MyUser.query.get(int(user_id))
 
-# class User(db.Model):
-#     __tablename__ = 'user'  # You might need to change this if 'user' is a reserved keyword
-#     __table_args__ = {'schema': 'public'}  # Specify the schema explicitly
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), index=True, unique=True)
-#     email = db.Column(db.String(120), index=True, unique=True)
-#     # products = db.relationship('Product', backref='seller', lazy='dynamic')
-
-#     def __repr__(self):
-#         return '<User {}>'.format(self.username)
-class MyUser(db.Model, UserMixin):
-    __tablename__ = 'my_user'
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    # image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.String(60), nullable=False)
-    products = db.relationship('Product', backref='seller', lazy='dynamic')
+    wishlist = db.relationship('Wishlist', backref='user', lazy='dynamic')
 
     def __repr__(self):
-        return '<MyUser {}>'.format(self.username)
+        return '<User {}>'.format(self.username)
 
-class Product(db.Model):
+class Wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('my_user.id'))  # Foreign key to MyUser
-
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    quantity = db.Column(db.Integer)  # Number of products in stock
-    product_details = db.relationship('ProductDetails', backref='product', lazy='dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 
     def __repr__(self):
-        return '<Product {}>'.format(self.id)
-
-class ProductDetails(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))  # Foreign key to Product
-
-    name = db.Column(db.String(128))
-    price = db.Column(db.Float)
-    short_description = db.Column(db.Text)
-    full_description = db.Column(db.Text)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-
-    def __repr__(self):
-        return '<ProductDetails {}>'.format(self.name)
+        return '<Wishlist {}>'.format(self.id)
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -61,12 +32,19 @@ class Category(db.Model):
     def __repr__(self):
         return '<Category {}>'.format(self.name)
 
-# class Rating(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     rating = db.Column(db.Integer)
-#     review = db.Column(db.Text)
-#     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    quantity = db.Column(db.Integer)
+    name = db.Column(db.String(128))
+    price = db.Column(db.Float)
+    short_description = db.Column(db.Text)
+    full_description = db.Column(db.Text)
+    image_url = db.Column(db.String(256))
 
-#     def __repr__(self):
-#         return '<Rating {}>'.format(self.rating)
+    seller = db.relationship('User', backref='products', lazy='select')
+
+    def __repr__(self):
+        return '<Product {}>'.format(self.id)
+
