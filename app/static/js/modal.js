@@ -9,6 +9,69 @@ $(document).ready(function () {
     $('#signInModal').modal('hide');
     $('#signUpModal').modal('show');
   });
+
+  $('#cartButton').click(function() {
+    $('#cartSidebar').toggleClass('active');
+  });
+
+  // Close cart sidebar when clicking outside of it
+  $(document).click(function(event) {
+    var $target = $(event.target);
+    if(!$target.closest('#cartSidebar').length && !$target.closest('#cartButton').length && $('#cartSidebar').hasClass('active')) {
+      $('#cartSidebar').removeClass('active');
+    }
+  });
+
+  $('#wishlistButton').click(function() {
+    $('#wishlistSidebar').toggleClass('active');
+  });
+
+  // Close wishlist sidebar when clicking outside of it
+  $(document).click(function(event) {
+    var $target = $(event.target);
+    if(!$target.closest('#wishlistSidebar').length && !$target.closest('#wishlistButton').length && $('#wishlistSidebar').hasClass('active')) {
+      $('#wishlistSidebar').removeClass('active');
+    }
+  });
+
+
+  window.deleteWishlistItem = function(itemId) {
+    $.ajax({
+      url: '/delete_wishlist_item', // The URL to the server endpoint
+      type: 'POST',
+      data: JSON.stringify({ itemId: itemId }), // Send the itemId as JSON
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function(response) {
+        if(response.success) {
+          // If the server responds successfully, remove the item from the DOM
+          $(`#wishlistItem-${itemId}`).remove();
+          // Alternatively, you could refresh the page or update the view in another way
+        } else {
+          // Handle failure (e.g., item not found or not deleted)
+          alert("An error occurred while trying to delete the wishlist item.");
+        }
+      },
+      error: function(xhr, status, error) {
+        // Handle general AJAX errors (e.g., network issues, server errors)
+        console.error("AJAX error: Status =", status, "Error =", error);
+      }
+    });
+  };
+
+  window.viewItemDetails = function(itemId) {
+    // Placeholder function to view item details
+    // In a real application, you might navigate to the item's detail page or open a modal with the item's information
+    console.log("View details for item with ID:", itemId);
+  };
+
+  window.deleteSellingItem = function(itemId) {
+    // Similar AJAX call to delete the selling item
+    console.log("Delete selling item with ID:", itemId);
+    // Implement the AJAX call similarly to the wishlist item deletion
+  };
+
+
 });
 
 
@@ -50,6 +113,7 @@ function autoSlides() {
 
 autoSlides(); // Start the automatic slideshow
 
+
 let cart = []; // Initialize an empty cart
 
 // Function to add product to cart
@@ -86,6 +150,7 @@ function updateCartModal() {
 
 // Event listener for cart modal open
 document.getElementById('cartButton').addEventListener('click', updateCartModal);
+
 
 
 // navbar toggle
