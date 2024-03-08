@@ -1,6 +1,7 @@
 from app import app, db, bcrypt
 from flask_bcrypt import Bcrypt
 from app.models import MyUser
+from sqlalchemy import text
 from app.forms import RegistrationForm, LoginForm, PostForm
 from app.models import MyUser, Product, Category
 
