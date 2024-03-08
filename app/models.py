@@ -27,17 +27,6 @@ class Wishlist(db.Model):
     def __repr__(self):
         return '<Product {}>'.format(self.id)
 
-class ProductDetails(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
-    price = db.Column(db.Float)
-    short_description = db.Column(db.Text)
-    full_description = db.Column(db.Text)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-
-    def __repr__(self):
-        return '<ProductDetails {}>'.format(self.name)
-
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True, unique=True)
