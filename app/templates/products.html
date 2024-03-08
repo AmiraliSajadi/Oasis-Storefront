@@ -1,19 +1,16 @@
-{%extends "layout.html"%}
+{% extends "layout.html" %}
 
-{%block content%}
+{% block content %}
 
 <section id="product-description">
 
     <div class="multicard">
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
+        {% for product in products %}
+        <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
             <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
+                <span class="product-brand">{{ product.category }}</span>  <!-- Assuming category is included in product data -->
+                <div class="product-name"><h5>{{ product.name }}</h5></div>
                 <div class="star">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -21,285 +18,20 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <div class="price">$110.00</div>
-
-
+                <div class="price">${{ product.price }}</div>
             </div>
             <button class="heart-button">❤</button>
             <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
         </div>
-
-        <!-- 2 -->
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        <div class="product-card">
-            <!-- <div class="product-image"> -->
-                <img src="../static/img/n5.jpg" alt="Classic Utility Jacket">
-            <!-- </div> -->
-            <div class="product-info">
-                <!-- <div class="product-brand-price"> -->
-                <span class="product-brand">Adidas</span>
-                <!-- </div> -->
-                <div class="product-name"><h5>Utility Jacket</h5></div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">$110.00</div>
-
-
-            </div>
-            <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
-        </div>
-
-        
+        {% endfor %}
     </div>
 
 </section>
 
+<script>
+    function redirectToProductDetails(productId) {
+        window.location.href = "/product_details/" + productId;
+    }
+</script>
 
-
-{%endblock%}
+{% endblock %}

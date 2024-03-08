@@ -13,7 +13,7 @@
         <h2>{{ product_detail.name }}</h2>
         <p class="price">${{ product_detail.price }}</p>
         <p>{{ product_detail.short_description }}</p>
-        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-primary" onclick="addToCart({{ product_detail.id }})">Add to Cart</button>
       </div>
     </div>
 

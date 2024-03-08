@@ -2,6 +2,7 @@ from app import app, db, bcrypt
 from flask_bcrypt import Bcrypt
 from app.models import MyUser
 from app.forms import RegistrationForm, LoginForm
+from app.models import MyUser, Product, Category
 from flask import render_template, redirect, url_for, flash, session, request
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -82,7 +83,24 @@ def contact():
 
 @app.route("/products")
 def products():
-    return render_template('products.html', title='Products')
+    all_products = Product.query.all()
+    
+    products_data = [{
+        'id' : product.id,
+        'name': product.name,
+        'price': product.price,
+        'short_description': product.short_description,
+        'image_url': product.image_url,
+        'quantity': product.quantity
+    } for product in all_products]
+    
+    return render_template('products.html', title='Products', products=products_data)
+
+@app.route("/product_details/<int:id>", methods=['GET'])
+def productsDetails(id):
+    sql_query = text("SELECT * FROM product WHERE id = :id")
+    product_detail = db.session.execute(sql_query, {'id': id}).fetchone()
+    return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
 
 @app.route("/userProfile")

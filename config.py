@@ -5,3 +5,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('OASIS_DATABASE_URL') or 'postgresql://username:password@localhost/mydatabase'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
+    SQLALCHEMY_SCHEMA = 'public'
