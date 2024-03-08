@@ -104,12 +104,12 @@
           <li>
             <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
           </li>
+          {% if current_user.is_authenticated%}
 
           <li>
             <a href="{{url_for('sell')}}" class="navbar-link">Sell</a>
           </li>
 
-          {% if current_user.is_authenticated%}
           <li>
             <a href="{{url_for('logout')}}" class="navbar-link">Log out</a>
           </li>          

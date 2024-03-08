@@ -1,8 +1,9 @@
 from app import app, db, bcrypt
 from flask_bcrypt import Bcrypt
 from app.models import MyUser
-from app.forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm, PostForm
 from app.models import MyUser, Product, Category
+
 
 
 from flask import render_template, redirect, url_for, flash, session, request
@@ -75,9 +76,7 @@ def login():
 def add_to_cart():
     return render_template('add_to_cart.html', title='Add to Cart')
 
-@app.route("/sell")
-def sell():
-    return render_template('sell.html', title='Sell')
+
 
 @app.route("/contact")
 def contact():
@@ -85,8 +84,10 @@ def contact():
 
 @app.route("/products")
 def products():
+    # page = request.args.get('page', 1, type=int)
+    # all_products = Product.query.paginate(page=page, per_page=10)
     all_products = Product.query.all()
-    
+
     products_data = [{
         'id' : product.id,
         'name': product.name,
@@ -109,3 +110,16 @@ def productsDetails(id):
 @login_required
 def userProfile():
     return render_template('userProfile.html', title='User Profile')
+
+@app.route("/sell", methods=["GET", "POST"])
+@login_required
+def sell():
+    form = PostForm()
+    if form.validate_on_submit():
+        # Create a new product
+        new_product = Product(name=form.name.data, price=form.price.data, short_description=form.shortdesc.data, full_description=form.fulldesc.data, image_url=form.img_url.data, category_id=form.category_id.data, quantity=form.quantity.data, user_id=current_user.id)
+        db.session.add(new_product)
+        db.session.commit()
+        flash('New product created successfully!', 'success')
+        return redirect(url_for('home'))
+    return render_template('sell.html', title='New Product', form=form)
