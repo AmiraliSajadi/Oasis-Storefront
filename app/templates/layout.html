@@ -57,7 +57,7 @@
           <p class="header-action-label">Cart</p>
         </button>
 
-        <button class="header-action-btn">
+        <button class="header-action-btn"  id="wishlistButton">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
           <p class="header-action-label">Wishlist</p>
@@ -101,9 +101,9 @@
             <a href="{{url_for('about')}}" class="navbar-link">About</a>
           </li>
 
-          <li>
+          <!-- <li>
             <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
-          </li>
+          </li> -->
           {% if current_user.is_authenticated%}
 
           <li>
@@ -269,28 +269,30 @@
   </div>
 
     <!-- Cart Modal -->
-<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<div id="cartSidebar" class="cart-sidebar">
+      <div class="cart-header">
+        <h5>Your Cart</h5>
+        <button class="close-cart" onclick="$('#cartSidebar').removeClass('active');">&times;</button>
       </div>
-      <div class="modal-body">
-        <div id="cartItemsContainer"></div>
+      <div id="cartItemsContainer">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+      <div class="cart-footer">
         <p id="cartTotal">Total: $0</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Checkout</button>
       </div>
     </div>
+
+    <!-- Wishlist Sidebar -->
+<div id="wishlistSidebar" class="wishlist-sidebar">
+  <div class="wishlist-header">
+    <h5>Your Wishlist</h5>
+    <button class="close-wishlist" onclick="$('#wishlistSidebar').removeClass('active');">&times;</button>
+  </div>
+  <div id="wishlistItemsContainer">
+    <!-- Wishlist items will be dynamically inserted here -->
   </div>
 </div>
-
-
 
   <!-- </article> -->
 
