@@ -6,10 +6,14 @@ from flask_login import UserMixin
 def load_user(user_id):
     return MyUser.query.get(int(user_id))
 
-class User(db.Model):
+class MyUser(db.Model, UserMixin):
+    __tablename__ = 'my_user'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
+    password = db.Column(db.String(60), nullable=False)
+
     wishlist = db.relationship('Wishlist', backref='user', lazy='dynamic')
 
     def __repr__(self):
@@ -17,11 +21,22 @@ class User(db.Model):
 
 class Wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('my_user.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 
     def __repr__(self):
-        return '<Wishlist {}>'.format(self.id)
+        return '<Product {}>'.format(self.id)
+
+class ProductDetails(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    price = db.Column(db.Float)
+    short_description = db.Column(db.Text)
+    full_description = db.Column(db.Text)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+
+    def __repr__(self):
+        return '<ProductDetails {}>'.format(self.name)
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,7 +49,7 @@ class Category(db.Model):
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('my_user.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     quantity = db.Column(db.Integer)
     name = db.Column(db.String(128))
@@ -43,7 +58,7 @@ class Product(db.Model):
     full_description = db.Column(db.Text)
     image_url = db.Column(db.String(256))
 
-    seller = db.relationship('User', backref='products', lazy='select')
+    seller = db.relationship('MyUser', backref='products', lazy='select')
 
     def __repr__(self):
         return '<Product {}>'.format(self.id)
