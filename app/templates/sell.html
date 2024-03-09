@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 
 {% block main_content %}
+
+  <!-- Display flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+
 <div class="container mt-5">
   <h2>Sell Your Item</h2>
   <form id="sellItemForm" enctype="multipart/form-data">
@@ -25,11 +37,11 @@
       <label for="productCategory">Product Category</label>
       <select class="form-control" id="productCategory" name="productCategory" required>
         <option value="">Select a category</option>
-        <option value="electronics">Electronics</option>
-        <option value="clothing">Clothing</option>
-        <option value="home_garden">Home & Garden</option>
-        <option value="sports">Sports</option>
-        <option value="toys">Toys</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Home_garden">Home & Garden</option>
+        <option value="Sports">Sports</option>
+        <option value="Toys">Toys</option>
         <!-- Add other categories as needed -->
       </select>
     </div>

@@ -95,4 +95,40 @@ $(document).ready(function () {
     });
   });
 
+  document.getElementById('sellItemForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var productName = document.getElementById('productName').value;
+    var shortDescription = document.getElementById('shortDescription').value;
+    var fullDescription = document.getElementById('fullDescription').value;
+    var productCategory = document.getElementById('productCategory').value;
+    console.log(productCategory)
+    var productPrice = document.getElementById('productPrice').value;
+    var productQuantity = document.getElementById('productQuantity').value;
+    
+    if (!productName || !shortDescription || !fullDescription || !productCategory || !productPrice || !productQuantity) {
+        alert('Please fill in all fields.');
+        return;
+    }
+    
+    // Additional validation logic (e.g., check image count, price format) can be added here
+    // Add image validation here
+    
+    var formData = new FormData(this);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                alert('Item uploaded successfully!');
+            } else {
+                alert('Error uploading item.');
+            }
+        }
+    };
+    xhr.send(formData);
+});
+
+
 });

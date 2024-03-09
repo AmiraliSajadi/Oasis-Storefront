@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from app.models import MyUser
 from sqlalchemy import text
 from app.forms import RegistrationForm, LoginForm, PostForm
-from app.models import MyUser, Product, Wishlist, CartItem
+from app.models import MyUser, Product, Wishlist, CartItem, Category
 
 from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
@@ -148,3 +148,43 @@ def add_to_cart():
         return jsonify({'message': 'Product added to cart'})
 
     # Implement adding item to cart here (For both logged in and not logged in users)
+
+@app.route('/upload', methods=['POST'])
+def upload_item():
+    if request.method == 'POST':
+        product_name = request.form.get('productName')
+        short_description = request.form.get('shortDescription')
+        full_description = request.form.get('fullDescription')
+        product_category_name = request.form.get('productCategory')
+        product_price = float(request.form.get('productPrice'))
+        product_quantity = int(request.form.get('productQuantity'))  # Default quantity is 1
+
+        # Assuming static image URL
+        image_url = "./static/img/uploads/product_img_1.jpg"
+        
+        # Validate form data (you can add more validation logic here)
+        if not (product_name and short_description and full_description and product_category_name and product_price):
+            return jsonify({'error': 'Incomplete form data'}), 400
+        # Fetch category ID based on category name
+        category = Category.query.filter_by(name=product_category_name).first()
+        if not category:
+            return jsonify({'error': 'Invalid category'}), 400
+        
+        # Create a new product object
+        new_product = Product(
+            name=product_name,
+            short_description=short_description,
+            full_description=full_description,
+            category_id=category.id,
+            price=product_price,
+            quantity=product_quantity,
+            image_url=image_url,
+            user_id=current_user.id  # Assuming current_user is the authenticated user
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        return redirect(url_for('userSetting'))
+        
+
+if __name__ == '__main__':
+    app.run(debug=True)
