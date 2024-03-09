@@ -12,8 +12,7 @@ install the required packages:
 
 ## Set your system variables
 You need to set the two variables used in *config.py*:
-- OASIS_SECRET_KEY
-- OASIS_DATABASE_URL 
+- OASIS_DATABASE_URL
 
 ## Run the Flask app
 just run the *run.py* file in the root directory:
