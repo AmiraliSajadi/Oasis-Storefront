@@ -75,18 +75,20 @@ def contact():
 
 @app.route("/products")
 def products():
-    all_products = Product.query.all()
+    page = request.args.get('page', 1, type=int)
+    all_products = Product.query.paginate(page=page, per_page=10)
+    # all_products = Product.query.order_by(Products.----.desc()).paginate(page=page, per_page=10)
 
-    products_data = [{
-        'id' : product.id,
-        'name': product.name,
-        'price': product.price,
-        'short_description': product.short_description,
-        'image_url': product.image_url,
-        'quantity': product.quantity
-    } for product in all_products]
+    # products_data = [{
+    #     'id' : product.id,
+    #     'name': product.name,
+    #     'price': product.price,
+    #     'short_description': product.short_description,
+    #     'image_url': product.image_url,
+    #     'quantity': product.quantity
+    # } for product in all_products]
     
-    return render_template('products.html', title='Products', products=products_data)
+    return render_template('products.html', title='Products', products=all_products)
 
 @app.route("/product_details/<int:id>", methods=['GET'])
 def productsDetails(id):
@@ -95,12 +97,12 @@ def productsDetails(id):
     return render_template('product_details.html', title='Products Details', product_detail=product_detail)
 
 @app.route("/userProfile")
-@login_required
 def userProfile():
     return render_template('userProfile.html', title='User Profile')
 
 @app.route("/user_settings")
-def userSetting():
+@login_required
+def user_settings():
     return render_template('user_settings.html', title='User Settings')
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -117,6 +119,7 @@ def sell():
     return render_template('sell.html', title='New Product', form=form)
 
 @app.route('/add_to_wishlist', methods=['POST'])
+@login_required
 def handle_add_to_wishlist():
     if current_user.is_authenticated:
         data = request.get_json()
@@ -185,6 +188,26 @@ def upload_item():
         db.session.commit()
         return redirect(url_for('userSetting'))
         
+
+
+@app.route("/products/<int:id>", methods=['GET'])
+def products_categories():
+    page = request.args.get('page', 1, type=int)
+    # c_products = Product.query.filter_by(category_id=id).paginate(page=page, per_page=10)
+    all_products = Product.query.paginate(page=page, per_page=10)
+    
+    # products_data = [{
+    #     'id' : product.id,
+    #     'name': product.name,
+    #     'price': product.price,
+    #     'short_description': product.short_description,
+    #     'image_url': product.image_url,
+    #     'quantity': product.quantity
+    # } for product in all_products]
+    
+    return render_template('products.html', title='Products', products=all_products)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
