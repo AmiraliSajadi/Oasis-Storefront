@@ -160,7 +160,7 @@ def upload_item():
         product_quantity = int(request.form.get('productQuantity'))  # Default quantity is 1
 
         # Assuming static image URL
-        image_url = "./static/img/uploads/product_img_1.jpg"
+        image_url = "../static/img/uploads/product_img_1.jpg"
         
         # Validate form data (you can add more validation logic here)
         if not (product_name and short_description and full_description and product_category_name and product_price):
