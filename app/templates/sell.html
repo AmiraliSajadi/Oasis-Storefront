@@ -14,8 +14,12 @@
       <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name" required>
     </div>
     <div class="form-group">
-      <label for="productDescription">Description of the Product</label>
-      <textarea class="form-control" id="productDescription" name="productDescription" rows="3" placeholder="Enter product description" required></textarea>
+      <label for="shortDescription">Short Description</label>
+      <input type="text" class="form-control" id="shortDescription" name="shortDescription" placeholder="Enter short description" required>
+    </div>
+    <div class="form-group">
+      <label for="fullDescription">Full Description</label>
+      <textarea class="form-control" id="fullDescription" name="fullDescription" rows="3" placeholder="Enter full description" required></textarea>
     </div>
     <div class="form-group">
       <label for="productCategory">Product Category</label>
@@ -28,6 +32,10 @@
         <option value="toys">Toys</option>
         <!-- Add other categories as needed -->
       </select>
+    </div>
+    <div class="form-group">
+      <label for="productPrice">Price</label>
+      <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Enter product price" required>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
