@@ -52,3 +52,13 @@ class Product(db.Model):
     def __repr__(self):
         return '<Product {}>'.format(self.id)
 
+class CartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('my_user.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    quantity = db.Column(db.Integer)
+
+    product = db.relationship('Product', backref='cart_items')
+
+    def __repr__(self):
+        return f'<CartItem {self.id}>'
