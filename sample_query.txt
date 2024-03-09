@@ -1,22 +1,20 @@
-	-- -- Some Sample queries you can use to populate your database with 4 itmes
+-- Create user1
+INSERT INTO my_user (username, email, password)
+VALUES ('user1', 'user1@example.com', '123');
+-- Create user2
+INSERT INTO my_user (username, email, password)
+VALUES ('user2', 'user2@example.com', '456');
 
-	-- Insert categories
-	INSERT INTO category (name, description)
-	VALUES 
-		('Electronics', 'Electronic devices and gadgets'),
-		('Clothing', 'Clothing items and accessories');
-
-	-- -- Display the category table
-	SELECT * FROM category
-
-
-	-- Insert products with details
-	INSERT INTO product (name, price, short_description, full_description, image_url, category_id, quantity)
-	VALUES
-		('Laptop', 999.99, 'Powerful laptop for all your computing needs', 'This laptop comes with a high-resolution display, fast processor, and ample storage.', '../static/img/uploads/product_img_1.jpg', 1, 10),  
-		('Smartphone', 699.99, 'Cutting-edge smartphone with advanced features', 'The latest smartphone model with a stunning camera, long battery life, and fast performance.', '../static/img/uploads/product_img_1.jpg', 1, 20),  
-		('T-shirt', 19.99, 'Comfortable cotton T-shirt for everyday wear', 'This T-shirt is made from soft, breathable cotton and features a classic design that pairs well with any outfit.', '../static/img/uploads/product_img_2.jpg', 2, 30),
-		('Jeans', 39.99, 'Classic denim jeans for a timeless look', 'These jeans are crafted from durable denim and feature a relaxed fit that provides all-day comfort.', '../static/img/uploads/product_img_2.jpg', 2, 40);
-
-	-- View products details table
-	SELECT * FROM product
+-- Insert categories
+INSERT INTO category (name, description)
+VALUES 
+	('Electronics', 'Electronic devices and gadgets'),
+	('Clothing', 'Clothing items and accessories');
+	
+-- Insert products with details
+INSERT INTO product (name, user_id, price, short_description, full_description, image_url, category_id, quantity)
+VALUES
+	('Laptop', 1,  999.99, 'Powerful laptop for all your computing needs', 'This laptop comes with a high-resolution display, fast processor, and ample storage.', '../static/img/uploads/product_img_1.jpg', 1, 10),  
+	('Smartphone', 2, 699.99, 'Cutting-edge smartphone with advanced features', 'The latest smartphone model with a stunning camera, long battery life, and fast performance.', '../static/img/uploads/product_img_1.jpg', 1, 20),  
+	('T-shirt', 1, 19.99, 'Comfortable cotton T-shirt for everyday wear', 'This T-shirt is made from soft, breathable cotton and features a classic design that pairs well with any outfit.', '../static/img/uploads/product_img_2.jpg', 2, 30),
+	('Jeans', 2, 39.99, 'Classic denim jeans for a timeless look', 'These jeans are crafted from durable denim and feature a relaxed fit that provides all-day comfort.', '../static/img/uploads/product_img_2.jpg', 2, 40);
