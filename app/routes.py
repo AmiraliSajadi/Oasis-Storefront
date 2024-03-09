@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from app.models import MyUser
 from sqlalchemy import text
 from app.forms import RegistrationForm, LoginForm, PostForm
-from app.models import MyUser, Product, Wishlist
+from app.models import MyUser, Product, Wishlist, CartItem
 
 from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
@@ -69,10 +69,6 @@ def login():
             flash("Login Unsuccessful. Please check username and password", "danger")
     return render_template('login.html', title='Login', form=form)
 
-@app.route("/add_to_cart")
-def add_to_cart():
-    return render_template('add_to_cart.html', title='Add to Cart')
-
 @app.route("/contact")
 def contact():
     return render_template('contact.html', title='Contact')
@@ -131,3 +127,24 @@ def handle_add_to_wishlist():
         db.session.commit()
 
         return jsonify({'message': 'Product added to wishlist'}), 200
+
+@app.route('/add_to_cart', methods=['POST'])
+@login_required
+def add_to_cart():
+    if current_user.is_authenticated:
+        data = request.json
+        product_id = data.get('productId')
+        user_id = current_user.id
+        
+        # Check if the item is already in the user's cart
+        existing_item = CartItem.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if existing_item:
+            existing_item.quantity += 1
+        else:
+            new_item = CartItem(user_id=user_id, product_id=product_id, quantity=1)
+            db.session.add(new_item)
+        
+        db.session.commit()
+        return jsonify({'message': 'Product added to cart'})
+
+    # Implement adding item to cart here (For both logged in and not logged in users)
