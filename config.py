@@ -6,3 +6,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
     SQLALCHEMY_SCHEMA = 'public'
+    UPLOAD_FOLDER = 'app/static/img/uploads/'

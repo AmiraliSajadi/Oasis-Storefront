@@ -1,3 +1,5 @@
+import os
+
 from app import app, db, bcrypt
 from flask_bcrypt import Bcrypt
 from app.models import MyUser
@@ -7,6 +9,7 @@ from app.models import MyUser, Product, Wishlist, CartItem, Category
 
 from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
+from werkzeug.utils import secure_filename
 
 
 @app.route("/")
@@ -152,6 +155,19 @@ def add_to_cart():
 
     # Implement adding item to cart here (For both logged in and not logged in users)
 
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/upload', methods=['POST'])
 def upload_item():
     if request.method == 'POST':
@@ -162,18 +178,35 @@ def upload_item():
         product_price = float(request.form.get('productPrice'))
         product_quantity = int(request.form.get('productQuantity'))  # Default quantity is 1
 
-        # Assuming static image URL
-        image_url = "./static/img/uploads/product_img_1.jpg"
-        
-        # Validate form data (you can add more validation logic here)
         if not (product_name and short_description and full_description and product_category_name and product_price):
-            return jsonify({'error': 'Incomplete form data'}), 400
-        # Fetch category ID based on category name
+            flash('Incomplete form data', 'error')
+            return redirect(request.url)
+
+        if 'productImages' not in request.files:
+            flash('No file part', 'error')
+            return redirect(request.url)
+
+        files = request.files.getlist('productImages')
+
+        image_url = None
+
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                # Set the image_url to the path of the first uploaded image
+                # This needs to be edited
+                if image_url is None:
+                    image_url = f"../static/img/uploads/{filename}"
+            else:
+                flash('Invalid file format', 'error')
+                return redirect(request.url)
+
         category = Category.query.filter_by(name=product_category_name).first()
         if not category:
-            return jsonify({'error': 'Invalid category'}), 400
-        
-        # Create a new product object
+            flash('Invalid category', 'error')
+            return redirect(request.url)
+
         new_product = Product(
             name=product_name,
             short_description=short_description,
@@ -182,10 +215,12 @@ def upload_item():
             price=product_price,
             quantity=product_quantity,
             image_url=image_url,
-            user_id=current_user.id  # Assuming current_user is the authenticated user
+            user_id=current_user.id
         )
         db.session.add(new_product)
         db.session.commit()
+
+        flash('Item uploaded successfully', 'success')
         return redirect(url_for('userSetting'))
         
 
