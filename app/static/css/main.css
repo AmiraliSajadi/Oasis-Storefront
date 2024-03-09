@@ -1141,3 +1141,61 @@ a.article-title:hover {
     right: 0; /* Slide in */
   }
   
+#pagination .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 10px 40px;
+    border-radius: 6px;
+    gap: 10px;
+}
+
+#pagination ul {
+    margin: 20px 30px;
+}
+
+#pagination ul li{
+    display: inline-block;
+    margin: 0 10px;
+    background: #ccc;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+#pagination .btn-prev .btn-next {
+    display: inline-flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 500;
+    background: transparent;
+    color: #383838;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+#pagination .page-link {
+    color: #088178;
+    border: 1px solid #088178;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
