@@ -75,21 +75,10 @@ $(document).ready(function () {
 });
 
 
-// Image slideshow
-var slideIndex = 1;  // Initialize slideIndex to 1
-showSlides(slideIndex);  // Call showSlides with slideIndex to show the first slide
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
+  slides = Array.from(slides); // Convert HTMLCollection to array
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
@@ -98,21 +87,18 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
 }
 
-// Auto Slide
 function autoSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
+  slides = Array.from(slides); // Convert HTMLCollection to array
+  slideIndex++;
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-  slideIndex++;
   if (slideIndex > slides.length) { slideIndex = 1 }
   slides[slideIndex - 1].style.display = "block";
   setTimeout(autoSlides, 3000); // Change image every 3 seconds
 }
-
-autoSlides(); // Start the automatic slideshow
-
 
 let cart = []; // Initialize an empty cart
 
@@ -154,8 +140,6 @@ document.getElementById('cartButton').addEventListener('click', updateCartModal)
 
 
 // navbar toggle
-
-
 const overlay = document.querySelector("[data-overlay]");
 const navOpenBtn = document.querySelector("[data-nav-open-btn]");
 const navbar = document.querySelector("[data-navbar]");
@@ -172,8 +156,6 @@ for (let i = 0; i < navElemArr.length; i++) {
 
 
 // Adds active class on header when scrolled 200px from top
-
-
 const header = document.querySelector("[data-header]");
 
 window.addEventListener("scroll", function () {
@@ -182,8 +164,40 @@ window.addEventListener("scroll", function () {
 })
 
 
-// Play videos on hover
+document.addEventListener('DOMContentLoaded', function() {
+  const addToWishlistLinks = document.querySelectorAll('.add-to-wishlist');
+  addToWishlistLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+          event.preventDefault();
 
+          const productId = this.dataset.productId; 
+
+          addToWishlist(productId);
+      });
+  });
+
+  function addToWishlist(productId) {
+      fetch('/add_to_wishlist', {
+          method: 'POST',
+          body: JSON.stringify({ product_id: productId }),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => {
+          if (response.ok) {
+              console.log('Product added to wishlist');
+          } else {
+              console.error('Error adding product to wishlist');
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  }
+});
+
+// Play videos on hover
 document.addEventListener('DOMContentLoaded', () => {
   const videos = document.querySelectorAll('.product-video');
 

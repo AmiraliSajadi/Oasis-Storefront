@@ -3,9 +3,9 @@ from flask_bcrypt import Bcrypt
 from app.models import MyUser
 from sqlalchemy import text
 from app.forms import RegistrationForm, LoginForm, PostForm
-from app.models import MyUser, Product, Category
+from app.models import MyUser, Product, Wishlist
 
-from flask import render_template, redirect, url_for, flash, session, request
+from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -52,8 +52,6 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -75,16 +73,12 @@ def login():
 def add_to_cart():
     return render_template('add_to_cart.html', title='Add to Cart')
 
-
-
 @app.route("/contact")
 def contact():
     return render_template('contact.html', title='Contact')
 
 @app.route("/products")
 def products():
-    # page = request.args.get('page', 1, type=int)
-    # all_products = Product.query.paginate(page=page, per_page=10)
     all_products = Product.query.all()
 
     products_data = [{
@@ -103,7 +97,6 @@ def productsDetails(id):
     sql_query = text("SELECT * FROM product WHERE id = :id")
     product_detail = db.session.execute(sql_query, {'id': id}).fetchone()
     return render_template('product_details.html', title='Products Details', product_detail=product_detail)
-
 
 @app.route("/userProfile")
 @login_required
@@ -126,3 +119,15 @@ def sell():
         flash('New product created successfully!', 'success')
         return redirect(url_for('home'))
     return render_template('sell.html', title='New Product', form=form)
+
+@app.route('/add_to_wishlist', methods=['POST'])
+def handle_add_to_wishlist():
+    if current_user.is_authenticated:
+        data = request.get_json()
+        product_id = data.get('product_id')
+
+        wishlist_item = Wishlist(user_id=current_user.id, product_id=product_id)
+        db.session.add(wishlist_item)
+        db.session.commit()
+
+        return jsonify({'message': 'Product added to wishlist'}), 200
