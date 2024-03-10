@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -22,7 +21,6 @@
 <body>
 
   <!-- Header -->
-
   <header class="header" data-header>
     <div class="container">
 
@@ -60,6 +58,7 @@
           <p class="header-action-label">Search</p>
         </button>
 
+        {% if current_user.is_authenticated %}
         <button class="header-action-btn" data-toggle="modal" data-target="#cartModal" id="cartButton">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Cart</p>
@@ -72,7 +71,7 @@
 
           <!-- <div class="btn-badge" aria-hidden="true">2</div> -->
         </button>
-
+        {% endif %}
 
       </div>
 
@@ -96,28 +95,22 @@
         </div>
 
         <ul class="navbar-list">
-
           <li>
             <a href="{{url_for('home')}}" class="navbar-link">Home</a>
           </li>
-
           <li>
             <a href="{{url_for('products')}}" class="navbar-link">Shop</a>
           </li>
-
           <li>
             <a href="{{url_for('about')}}" class="navbar-link">About</a>
           </li>
-
           <!-- <li>
             <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
           </li> -->
           {% if current_user.is_authenticated%}
-
           <li>
             <a href="{{url_for('sell')}}" class="navbar-link">Sell</a>
           </li>
-
           <li>
             <a href="{{url_for('logout')}}" class="navbar-link">Log out</a>
           </li>
@@ -128,8 +121,6 @@
           <li>
             <a href="{{url_for('login')}}" class="navbar-link">Login</a>
           </li>
-
-
           <li>
             <a href="{{url_for('register')}}" class="navbar-link">Register</a>
           </li>
@@ -146,66 +137,6 @@
 
     {%block content%}{%endblock%}
   </main>
-  <!-- <main> -->
-
-  <!-- <article class="section-p1"> -->
-
-
-  <!-- <div class="hero-section">
-      <section class="hero" id="hero"> -->
-
-  <!-- </section>
-    </div> -->
-  <!-- <div id="main" role="main" class="achor">
-
-      <div class="shopify-section-template">
-          <div class="Multicarusel-template">
-          </div>
-
-    </div> -->
-
-
-  <!-- <div id="features-item" class="selector-options">
-      {% block contentOptions %} {% endblock %}
-    </div> -->
-
-  <!-- <div id="sm-banner" class="section-p1">
-      {% block SectionBanner %}{% endblock %}
-    </div> -->
-
-
-
-  <!-- Footer -->
-  <!-- <div>
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h5>Information</h5>
-            <ul>
-              <li><a href="{{url_for('about')}}">About Us</a></li>
-              <li><a href="{{url_for('contact')}}">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h5>My Account</h5>
-            <ul>
-              <li><a href="{{url_for('login')}}">Login</a></li>
-              <li><a href="{{url_for('register')}}">Register</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h5>Contact Us</h5>
-            <ul>
-              <li>Phone: +92 123 456 789</li>
-              <li>Email:</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div> -->
-
 
   <!-- Sign In Modal -->
   <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
@@ -276,32 +207,25 @@
     </div>
   </div>
 
-  <!-- Cart Modal -->
-  <div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h5>Your Cart</h5>
-      <button class="close-cart" onclick="$('#cartSidebar').removeClass('active');">&times;</button>
+    <div id="cartSidebar" class="sidebar">
+      <!-- Content for the cart sidebar -->
+      <p>Cart Placeholder Paragraph</p>
     </div>
-    <div id="cartItemsContainer">
-      <!-- Cart items will be dynamically inserted here -->
+    
+    <div id="wishlistSidebar" class="sidebar">
+      <!-- Content for the wishlist sidebar -->
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+      <p>Wishlist Placeholder Paragraph</p>
     </div>
-    <div class="cart-footer">
-      <p id="cartTotal">Total: $0</p>
-      <button type="button" class="btn btn-primary">Checkout</button>
-    </div>
-  </div>
-
-  <!-- Wishlist Sidebar -->
-  <div id="wishlistSidebar" class="wishlist-sidebar">
-    <div class="wishlist-header">
-      <h5>Your Wishlist</h5>
-      <button class="close-wishlist" onclick="$('#wishlistSidebar').removeClass('active');">&times;</button>
-    </div>
-    <div id="wishlistItemsContainer">
-      <!-- Wishlist items will be dynamically inserted here -->
-    </div>
-  </div>
-
+    
   <!-- </article> -->
 
   <!-- </main> -->
@@ -315,30 +239,6 @@
     crossorigin="anonymous"></script>
   <script src="../static/js/modal.js"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-  <script>
-    // Sample cart items array
-    let cartItems = []; // This would be dynamically updated based on actual cart operations
-
-    document.getElementById('cartButton').addEventListener('click', function () {
-      var cartWindow = document.getElementById('cartWindow');
-      var cartContentsElement = document.getElementById('cartContents');
-      var cartTotalElement = document.getElementById('cartTotal');
-      var totalValue = cartItems.reduce((acc, item) => acc + item.price, 0);
-
-      // Update cart window content
-      if (cartItems.length > 0) {
-        let itemsList = cartItems.map(item => `${item.name} - $${item.price}`).join('<br>');
-        cartContentsElement.innerHTML = `Items:<br>${itemsList}`;
-        cartTotalElement.innerHTML = `Total: $${totalValue}`;
-      } else {
-        cartContentsElement.innerHTML = "0 items";
-        cartTotalElement.innerHTML = "Total: $0";
-      }
-
-      // Toggle display of cart window
-      cartWindow.style.display = cartWindow.style.display === 'none' ? 'block' : 'none';
-    });
-  </script>
 </body>
 
 </html>

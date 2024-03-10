@@ -1106,40 +1106,6 @@ a.article-title:hover {
     color: #088178;
     border: 1px solid #cce7d0;
 }
-
-.cart-sidebar {
-    position: fixed;
-    top: 60px; /* Adjust this value to match the height of your page header */
-    right: -100%; /* Start offscreen */
-    width: 300px;
-    height: calc(100% - 60px); /* Adjust this value to match the height of your page header */
-    background: white;
-    box-shadow: -2px 0 5px rgba(0,0,0,.5);
-    z-index: 1000; /* Ensure it's above other content but below any full-screen modals */
-    transition: right 0.3s ease;
-    overflow-y: auto; /* Add scroll for overflow content */
-  }
-  
-  .cart-sidebar.active {
-    right: 0; /* Slide in */
-  }
-  
-  .wishlist-sidebar {
-    position: fixed;
-    top: 60px; /* Adjust based on header height */
-    right: -100%; /* Start offscreen */
-    width: 300px;
-    height: calc(100% - 60px);
-    background: white;
-    box-shadow: -2px 0 5px rgba(0,0,0,.5);
-    z-index: 1000;
-    transition: right 0.3s ease;
-    overflow-y: auto;
-  }
-  
-  .wishlist-sidebar.active {
-    right: 0; /* Slide in */
-  }
   
 #pagination .container {
     display: flex;
@@ -1198,6 +1164,26 @@ a.article-title:hover {
     padding: 10px 15px;
     border-radius: 6px;
     transition: 0.25s ease;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hide the sidebar off-screen */
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease; /* Add smooth transition for sliding effect */
+}
+
+.sidebar.active {
+right: 0; /* Slide the sidebar in when it has the 'active' class */
+}
+
+/* Add styling for the content inside the sidebar */
+.sidebar-content {
+    padding: 20px;
 }
 
 .form-control-lg {

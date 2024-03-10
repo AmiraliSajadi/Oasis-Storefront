@@ -4,110 +4,88 @@ $(document).ready(function () {
     $('#signInModal').modal('show');
   });
 
-  // Show Cart Modal
-  $('#cartButton').click(function() {
-    $('#cartModal').modal('show');
-  });
-
   // Show Sign Up Modal
   $('#showSignUp').click(function () {
     $('#signInModal').modal('hide');
     $('#signUpModal').modal('show');
   });
-});
 
-
-// Image slideshow
-var slideIndex = 1;  // Initialize slideIndex to 1
-showSlides(slideIndex);  // Call showSlides with slideIndex to show the first slide
-
-let cartItems = []; // Assume this gets updated elsewhere in your code
-
-$('#cartButton').on('click', function() {
-  let cartContentsElement = $('#cartContents');
-  let cartTotalElement = $('#cartTotal');
-  let totalValue = cartItems.reduce((acc, item) => acc + item.price, 0);
-
-  if (cartItems.length > 0) {
-    let itemsList = cartItems.map(item => `${item.name} - $${item.price}`).join('<br>');
-    cartContentsElement.html(`Items:<br>${itemsList}`);
-    cartTotalElement.html(`Total: $${totalValue}`);
-  } else {
-    cartContentsElement.html("0 items");
-    cartTotalElement.html("Total: $0");
-  }
-});
-
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  if (n > slides.length) { slideIndex = 1 }
-  if (n < 1) { slideIndex = slides.length }
-  slides[slideIndex - 1].style.display = "block";
-}
-
-// Auto Slide
-function autoSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) { slideIndex = 1 }
-  slides[slideIndex - 1].style.display = "block";
-  setTimeout(autoSlides, 3000); // Change image every 3 seconds
-}
-
-autoSlides(); // Start the automatic slideshow
-
-
-
-
-// navbar toggle
-
-
-const overlay = document.querySelector("[data-overlay]");
-const navOpenBtn = document.querySelector("[data-nav-open-btn]");
-const navbar = document.querySelector("[data-navbar]");
-const navCloseBtn = document.querySelector("[data-nav-close-btn]");
-
-const navElemArr = [overlay, navOpenBtn, navCloseBtn];
-
-for (let i = 0; i < navElemArr.length; i++) {
-  navElemArr[i].addEventListener("click", function () {
-    navbar.classList.toggle("active");
-    overlay.classList.toggle("active");
+  $('#cartButton').click(function() {
+    $('#cartSidebar').toggleClass('active');
   });
-}
 
+  // Close cart sidebar when clicking outside of it
+  $(document).click(function(event) {
+    var $target = $(event.target);
+    if(!$target.closest('#cartSidebar').length && !$target.closest('#cartButton').length && $('#cartSidebar').hasClass('active')) {
+      $('#cartSidebar').removeClass('active');
+    }
+  });
 
-// Adds active class on header when scrolled 200px from top
+  $('#wishlistButton').click(function() {
+    $('#wishlistSidebar').toggleClass('active');
+  });
 
+  // Close wishlist sidebar when clicking outside of it
+  $(document).click(function(event) {
+    var $target = $(event.target);
+    if(!$target.closest('#wishlistSidebar').length && !$target.closest('#wishlistButton').length && $('#wishlistSidebar').hasClass('active')) {
+      $('#wishlistSidebar').removeClass('active');
+    }
+  });
 
-const header = document.querySelector("[data-header]");
+  // Function to add product to cart
+  $('.add-to-cart-btn').click(function() {
+    var productId = $(this).data('product-id');
+    addToCart(productId);
+  });
 
-window.addEventListener("scroll", function () {
-  window.scrollY >= 200 ? header.classList.add("active")
-    : header.classList.remove("active");
-})
+  function addToCart(productId) {
+    $.ajax({
+      url: '/add_to_cart',
+      type: 'POST',
+      data: JSON.stringify({ productId: productId }),
+      contentType: 'application/json',
+      success: function(response) {
+        console.log('Product added to cart');
+      },
+      error: function(xhr, status, error) {
+        if (xhr.status === 401) {
+          alert('Please log in first.');
+        } else {
+          console.error('Error adding product to cart:', error);
+        }
+      }
+    });
+  }
 
+  // Function to add product to wishlist
+  $('.add-to-wishlist').click(function(event) {
+    event.preventDefault();
+    const productId = $(this).data('productId');
+    addToWishlist(productId);
+  });
 
-// Play videos on hover
+  function addToWishlist(productId) {
+    $.ajax({
+        url: '/add_to_wishlist',
+        type: 'POST',
+        data: JSON.stringify({ product_id: productId }),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('Product added to wishlist');
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401) {
+                alert('Please log in first.');
+            } else {
+                console.error('Error adding product to wishlist:', error);
+            }
+        }
+    });
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
+  // Play videos on hover
   const videos = document.querySelectorAll('.product-video');
 
   videos.forEach(video => {
@@ -119,4 +97,50 @@ document.addEventListener('DOMContentLoaded', () => {
       video.currentTime = 0;
     });
   });
+
+  document.getElementById('sellItemForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var productName = document.getElementById('productName').value;
+    var shortDescription = document.getElementById('shortDescription').value;
+    var fullDescription = document.getElementById('fullDescription').value;
+    var productCategory = document.getElementById('productCategory').value;
+    console.log(productCategory)
+    var productPrice = document.getElementById('productPrice').value;
+    var productQuantity = document.getElementById('productQuantity').value;
+    
+    if (!productName || !shortDescription || !fullDescription || !productCategory || !productPrice || !productQuantity) {
+        alert('Please fill in all fields.');
+        return;
+    }
+    
+    // Additional validation logic (e.g., check image count, price format) can be added here
+    // Add image validation here
+    
+    var formData = new FormData(this);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                alert('Item uploaded successfully!');
+            } else {
+                alert('Error uploading item.');
+            }
+        }
+    };
+    xhr.send(formData);
+  });
+
+  // Show Cart Modal
+  $('#cartButton').click(function() {
+    $('#cartModal').modal('show');
+  });
+
+  // Show Wishlist Modal
+  $('#wishlistButton').click(function() {
+    $('#wishlistModal').modal('show');
+  });
+
 });
