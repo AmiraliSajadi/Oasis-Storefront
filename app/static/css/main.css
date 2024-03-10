@@ -1128,54 +1128,7 @@ a.article-title:hover {
     color: #088178;
     border: 1px solid #cce7d0;
 }
-<<<<<<< Updated upstream
-  
-=======
 
-.cart-sidebar {
-    position: fixed;
-    top: 60px;
-    /* Adjust this value to match the height of your page header */
-    right: -100%;
-    /* Start offscreen */
-    width: 300px;
-    height: calc(100% - 60px);
-    /* Adjust this value to match the height of your page header */
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, .5);
-    z-index: 1000;
-    /* Ensure it's above other content but below any full-screen modals */
-    transition: right 0.3s ease;
-    overflow-y: auto;
-    /* Add scroll for overflow content */
-}
-
-.cart-sidebar.active {
-    right: 0;
-    /* Slide in */
-}
-
-.wishlist-sidebar {
-    position: fixed;
-    top: 60px;
-    /* Adjust based on header height */
-    right: -100%;
-    /* Start offscreen */
-    width: 300px;
-    height: calc(100% - 60px);
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, .5);
-    z-index: 1000;
-    transition: right 0.3s ease;
-    overflow-y: auto;
-}
-
-.wishlist-sidebar.active {
-    right: 0;
-    /* Slide in */
-}
-
->>>>>>> Stashed changes
 #pagination .container {
     display: flex;
     justify-content: center;
@@ -1238,51 +1191,67 @@ a.article-title:hover {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -300px; /* Initially hide the sidebar off-screen */
+    right: -300px;
     width: 300px;
     height: 100%;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease; /* Add smooth transition for sliding effect */
+    transition: right 0.3s ease;
 }
 
 .sidebar.active {
-right: 0; /* Slide the sidebar in when it has the 'active' class */
+    right: 0;
 }
 
-/* Add styling for the content inside the sidebar */
 .sidebar-content {
     padding: 20px;
 }
 
 .form-control-lg {
-    padding: .5rem .75rem; /* Adjust padding to make text boxes smaller */
-    font-size: .875rem; /* Adjust font size as needed */
+    padding: .5rem .75rem;
+    /* Adjust padding to make text boxes smaller */
+    font-size: .875rem;
+    /* Adjust font size as needed */
 }
 
 /* Adjust width and padding for a more compact look */
 .form-control-lg {
-    max-width: 300px; /* Adjust width as needed */
-    margin: auto; /* Center the input boxes */
+    max-width: 300px;
+    /* Adjust width as needed */
+    margin: auto;
+    /* Center the input boxes */
 }
 
 /* Smaller and more compact button */
 .btn-outline-info {
-    padding: .25rem .5rem; /* Adjust padding to make the button smaller */
-    font-size: .875rem; /* Adjust font size as needed */
-    max-width: 200px; /* Adjust button width as needed */
-    margin: 20px auto; /* Center the button and add some margin at the top */
-    display: block; /* Necessary to apply margin auto for centering */
+    padding: .25rem .5rem;
+    /* Adjust padding to make the button smaller */
+    font-size: .875rem;
+    /* Adjust font size as needed */
+    max-width: 200px;
+    /* Adjust button width as needed */
+    margin: 20px auto;
+    /* Center the button and add some margin at the top */
+    display: block;
+    /* Necessary to apply margin auto for centering */
 }
-.form-group, .form-group div, .btn-outline-info {
-    margin-left: 0 !important; /* Remove any auto margin */
-    align-items: flex-start; /* Align items to the start of the flex container */
+
+.form-group,
+.form-group div,
+.btn-outline-info {
+    margin-left: 0 !important;
+    /* Remove any auto margin */
+    align-items: flex-start;
+    /* Align items to the start of the flex container */
 }
 
 /* Ensure inputs and button start from the left edge */
-.form-control-lg, .btn-outline-info {
-    width: auto; /* Allow the element to grow as needed, remove if fixed width is preferred */
-    margin-left: 0 !important; /* Remove any right margin if present */
+.form-control-lg,
+.btn-outline-info {
+    width: auto;
+    /* Allow the element to grow as needed, remove if fixed width is preferred */
+    margin-left: 0 !important;
+    /* Remove any right margin if present */
 }
 
 .form-check {
@@ -1292,6 +1261,133 @@ right: 0; /* Slide the sidebar in when it has the 'active' class */
 
 .form-check-input {
     width: auto;
-    margin-right: auto; /* Pushes the checkbox to the left */
-    margin-left: 5; /* Ensures it stays at the very left */
+    margin-right: auto;
+    /* Pushes the checkbox to the left */
+    margin-left: 5;
+    /* Ensures it stays at the very left */
+}
+
+
+
+.footer {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(250, 60%, 98%);
+}
+
+.footer_container {
+    display: grid;
+    grid-template-columns: 25% 15% 60%;
+    /* justify-self: center; */
+    column-gap: 2rem;
+    margin-top: 2rem;
+}
+
+.footer_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content vertically in the column */
+    justify-content: center; /* Centers the content horizontally in the column */
+}
+
+.footer_logo {
+
+    color: hsl(250, 8%, 15%);
+    text-transform: lowercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    column-gap: .25rem;
+    margin-bottom: 1rem;
+}
+
+/* .footer_logo */
+
+.footer_description {
+    margin-bottom: 2.5rem;
+}
+
+.footer_social {
+    display: flex;
+    column-gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.footer_social-link {
+    display: inline-flex;
+    background: #fff;
+    color: hsl(250, 8%, 15%);
+    font-size: 1rem;
+    font-size: 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: .2s;
+}
+
+.footer_social-link:hover {
+    background: #000;
+    color: #fff;
+}
+
+.footer_title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer_links {
+    display: grid;
+    font-size: 1.5rem;
+    row-gap: .35rem;
+}
+
+.footer_link {
+    font-size: 1rem;
+    color: hsl(250, 8%, 15%);
+    transition: .3s;
+}
+
+.footer_link:hover {
+    color: hsl(250, 8%, 15%);
+}
+
+.footer_copy {
+    display: block;
+    font-size: .875rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer_newsletter-form {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+}
+
+.footer_newsletter-form input[type="email"] {
+    /* flex-grow: 1; */
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    width: 50%; 
+    border-radius: 1rem;
+   
+}
+
+.footer_newsletter-form button {
+    padding: 0.5rem 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.footer_newsletter-form button:hover {
+    background-color: #333;
+    /* Adjust hover effect as needed */
 }

@@ -137,6 +137,55 @@
 
     {%block content%}{%endblock%}
   </main>
+  <!-- #### Footer -->
+
+  <div class="footer">
+    <div class="footer_container grid">
+      <div class="footer_content">
+        <a href="{{url_for('home')}}" class="footer_logo"><img src="../static/img/logo1.png" alt="Oasis logo" width="130" height="45"></a>
+
+        <p class="footer_description">We help people to find their lives better <br> with our products</p>
+
+        <div>
+          <a href="#" class="footer_social-link">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="footer_social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="footer_social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+        </div>
+
+      </div>
+      <div class="footer_content">
+        <h3 class="footer_title">About</h3>
+        <ul class="footer_link">
+          <li><a href="{{url_for('about')}}" class="footer_link">About us</a></li>
+          <li><a href="{{url_for('sell')}}" class="footer_link">Sell</a></li>
+          <li><a href="#" class="footer_link">Privacy Policy</a></li>
+          <li><a href="#" class="footer_link">Terms & Conditions</a></li>
+
+        </ul>
+      </div>
+      <div class="footer_content">
+        <!-- Newsletter section -->
+        <h3 class="footer_title">Our Newsletter</h3>
+        <p>Subscribe to our newsletter to get the latest updates.</p>
+        <form action="#" method="POST" class="footer_newsletter-form">
+          <input type="email" placeholder="Your Email Address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <span class="footer_copy">&#169; 2021 Oasis. All right reserved</span>
+
+  </div>
+
+
 
   <!-- Sign In Modal -->
   <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
@@ -207,25 +256,34 @@
     </div>
   </div>
 
-    <div id="cartSidebar" class="sidebar">
-      <!-- Content for the cart sidebar -->
-      <p>Cart Placeholder Paragraph</p>
-    </div>
-    
-    <div id="wishlistSidebar" class="sidebar">
-      <!-- Content for the wishlist sidebar -->
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      <p>Wishlist Placeholder Paragraph</p>
-    </div>
-    
+  <div id="cartSidebar" class="sidebar">
+    <!-- Content for the cart sidebar -->
+    <p>Cart Placeholder Paragraph</p>
+  </div>
+
+  <div id="wishlistSidebar" class="sidebar">
+    <!-- Content for the wishlist sidebar -->
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    <p>Wishlist Placeholder Paragraph</p>
+  </div>
+
   <!-- </article> -->
 
   <!-- </main> -->
