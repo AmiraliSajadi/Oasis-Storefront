@@ -266,20 +266,31 @@ h6 {
     text-align: center;
 }
 
-/* .vid {
-    display: grid;
-    place-items: center;
-    margin-inline: 1.5rem;
-    padding-block: 5rem;
-  } */
+.vid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.vid-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
 
 .card {
     display: inline-block;
     margin: 10px;
-    width: 200px;
+    width: calc(20% - 15px);
     vertical-align: top;
-    /* display: grid;
-    row-gap: 3.5rem; */
+
+
+    border-radius: 2px;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+    border: 0px solid rgb(255, 255, 255);
+    transition: 0.25s ease;
 }
 
 .card__article {
@@ -292,6 +303,12 @@ h6 {
     height: 250px;
     object-fit: cover;
     display: block;
+    border-radius: 2px;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+    border: 0px solid rgb(255, 255, 255);
+    transition: 0.25s ease;
 }
 
 .card__data {
@@ -945,7 +962,7 @@ a.article-title:hover {
     width: 23%;
     min-width: 250px;
     margin: 15px 0;
-    border: 1px solid #cce7d0;
+    border: 1px solid #cae2ce;
     padding: 10px 12px;
     border-radius: 25px;
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
@@ -997,11 +1014,17 @@ a.article-title:hover {
 }
 
 
-#product-description .add-button,
-.heart-button {
+#product-description .add-button {
     position: absolute;
     bottom: 20px;
     right: 10px;
+    cursor: pointer;
+}
+
+#product-description .heart-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     cursor: pointer;
 }
 
@@ -1010,10 +1033,10 @@ a.article-title:hover {
     height: 40px;
     line-height: 40px;
     border-radius: 50px;
-    background-color: #e8f6ea;
+
     font-weight: 500;
-    color: #088178;
-    border: 1px solid #cce7d0;
+    /* color: #088178; */
+    /* border: 1px solid #cce7d0; */
 }
 
 /* #product-description .heart-button {
@@ -1088,8 +1111,7 @@ a.article-title:hover {
 }
 
 
-#product-deals .add-button,
-.heart-button {
+#product-deals .add-button {
     position: absolute;
     bottom: 20px;
     right: 10px;
@@ -1106,7 +1128,54 @@ a.article-title:hover {
     color: #088178;
     border: 1px solid #cce7d0;
 }
+<<<<<<< Updated upstream
   
+=======
+
+.cart-sidebar {
+    position: fixed;
+    top: 60px;
+    /* Adjust this value to match the height of your page header */
+    right: -100%;
+    /* Start offscreen */
+    width: 300px;
+    height: calc(100% - 60px);
+    /* Adjust this value to match the height of your page header */
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, .5);
+    z-index: 1000;
+    /* Ensure it's above other content but below any full-screen modals */
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    /* Add scroll for overflow content */
+}
+
+.cart-sidebar.active {
+    right: 0;
+    /* Slide in */
+}
+
+.wishlist-sidebar {
+    position: fixed;
+    top: 60px;
+    /* Adjust based on header height */
+    right: -100%;
+    /* Start offscreen */
+    width: 300px;
+    height: calc(100% - 60px);
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, .5);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.wishlist-sidebar.active {
+    right: 0;
+    /* Slide in */
+}
+
+>>>>>>> Stashed changes
 #pagination .container {
     display: flex;
     justify-content: center;
@@ -1129,7 +1198,7 @@ a.article-title:hover {
     margin: 20px 30px;
 }
 
-#pagination ul li{
+#pagination ul li {
     display: inline-block;
     margin: 0 10px;
     background: #ccc;

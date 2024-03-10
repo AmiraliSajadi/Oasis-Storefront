@@ -3,6 +3,22 @@
 {% block content %}
 
 <section id="product-description">
+    {% if products.items %}
+    <div class="row">
+        <div class="header-wrapper">
+            <div class="searchterm" data-auto-id="plp-header-bar-search-container">
+                <div>search for:</div>
+                <h1 class="gl-vspace heading___3g-L_ heading--search" data-auto-id="plp-header-bar-search-title">
+                    “{{ search_query }}”</h1>
+                <div class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count">{{products.total}}</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endif %}
+
 
     <div class="multicard">
         {% if products.items %}
@@ -16,22 +32,16 @@
                 <div class="product-name">
                     <h5>{{ product.name }}</h5>
                 </div>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+
                 <div class="price">${{ product.price }}</div>
             </div>
             <button class="heart-button">❤</button>
-            <button class="add-button"><i class="fal fa-shopping-cart"></i></button>
+            <button class="add-button"><i class="fa fa-shopping-cart"></i></button>
         </div>
         {% endfor %}
         {% else %}
         <p>No products found matching your search.</p>
-    {% endif %}
+        {% endif %}
     </div>
 
 
@@ -41,35 +51,36 @@
 <section id="pagination" class="pagination">
     <div class="pagination-container">
         {% if products.pages > 1 %}
-            <div class="pagination">
-                <button class="btn-prev">
-                    {% if products.has_prev %}
-                        <a href="{{ url_for('search', page=products.prev_num, search=search_query) }}">Prev</a>
-                    {% endif %}
-                </button>
-                <ul class="pagination">
-                    {% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-                        {% if page_num %}
-                            {% if products.page == page_num %}
-                                <li class="page-item active">
-                                    <a class="page-link">{{ page_num }}</a>
-                                </li>
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('search', page=page_num, search=search_query) }}">{{ page_num }}</a>
-                                </li>
-                            {% endif %}
-                        {% else %}
-                            <li class="page-item">...</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                <button class="btn-next">
-                    {% if products.has_next %}
-                        <a href="{{ url_for('search', page=products.next_num, search=search_query) }}">Next</a>
-                    {% endif %}
-                </button>
-            </div>
+        <div class="pagination">
+            <button class="btn-prev">
+                {% if products.has_prev %}
+                <a href="{{ url_for('search', page=products.prev_num, search=search_query) }}">Prev</a>
+                {% endif %}
+            </button>
+            <ul class="pagination">
+                {% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                {% if products.page == page_num %}
+                <li class="page-item active">
+                    <a class="page-link">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('search', page=page_num, search=search_query) }}">{{ page_num
+                        }}</a>
+                </li>
+                {% endif %}
+                {% else %}
+                <li class="page-item">...</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <button class="btn-next">
+                {% if products.has_next %}
+                <a href="{{ url_for('search', page=products.next_num, search=search_query) }}">Next</a>
+                {% endif %}
+            </button>
+        </div>
         {% endif %}
     </div>
 </section>
