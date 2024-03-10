@@ -10,6 +10,44 @@ $(document).ready(function () {
     $('#signUpModal').modal('show');
   });
 
+// Handle sign in form submission
+$('#signInForm').submit(function(e) {
+  e.preventDefault();
+  var formData = $(this).serialize();
+  console.log(formData)
+  $.ajax({
+    url: '/login',
+    method: 'POST',
+    data: formData,
+    success: function(response) {
+      window.location.href = "/";
+    },
+    error: function(xhr, status, error) {
+      $('#signInError').text('Username or password is incorrect.');
+    }
+  });
+});
+
+  // Handle sign up form submission
+  $('#signUpForm').submit(function(e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+      url: '/register',
+      method: 'POST',
+      data: formData,
+      success: function(response) {
+        $('#signUpModal').modal('hide');
+        $('#signInModal').modal('show');
+        alert('Your account was created. Please sing in.');
+      },
+      error: function(xhr, status, error) {
+        $('#signUpErrorMessage').text('Sign up failed, please try again later').show();
+        // Handle error response, e.g., show an error message
+      }
+    });
+  });
+
   $('#cartButton').click(function() {
     $('#cartSidebar').toggleClass('active');
   });

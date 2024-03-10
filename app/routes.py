@@ -26,28 +26,11 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = MyUser(username=form.Username.data, email=form.Email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created! You are now able to login', 'success')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
-
-@app.route("/create_user")
-def create_user():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        # Create a new user
-        new_user = MyUser(username='example_user', email='user@example.com')
-        db.session.add(new_user)
-        db.session.commit()
-        flash('New user created successfully!', 'success')
-    return redirect(url_for('home'))
+    hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+    user = MyUser(username=form.Username.data, email=form.Email.data, password=hashed_password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({'Success': 'Account created'}), 200
 
 @app.route('/logout')
 @login_required
@@ -57,20 +40,17 @@ def logout():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
+    print('here')
     form = LoginForm()
-    if form.validate_on_submit():
-        # Check if user exists
-        user = MyUser.query.filter_by(email=form.Email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            # flash('Login successful!', 'success')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
-        else:
-            flash("Login Unsuccessful. Please check username and password", "danger")
-    return render_template('login.html', title='Login', form=form)
+    print(form.Email.data)
+    user = MyUser.query.filter_by(email=form.Email.data).first()
+    if user and bcrypt.check_password_hash(user.password, form.password.data):
+        login_user(user, remember=form.remember.data)
+        print('logged in')
+        next_page = request.args.get('next')
+        return redirect(next_page) if next_page else redirect(url_for('home'))
+    else:
+        return jsonify({'error': 'Invalid username or password'}), 400
 
 @app.route("/contact")
 def contact():
@@ -217,7 +197,6 @@ def upload_item():
         db.session.add(new_product)
         db.session.commit()
 
-        flash('Item uploaded successfully', 'success')
         return redirect(url_for('userSetting'))
         
 
