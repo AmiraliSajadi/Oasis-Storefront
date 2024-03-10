@@ -78,18 +78,11 @@ def contact():
 
 @app.route("/products")
 def products():
+
     page = request.args.get('page', 1, type=int)
     all_products = Product.query.paginate(page=page, per_page=10)
-    # all_products = Product.query.order_by(Products.----.desc()).paginate(page=page, per_page=10)
 
-    # products_data = [{
-    #     'id' : product.id,
-    #     'name': product.name,
-    #     'price': product.price,
-    #     'short_description': product.short_description,
-    #     'image_url': product.image_url,
-    #     'quantity': product.quantity
-    # } for product in all_products]
+
     
     return render_template('products.html', title='Products', products=all_products)
 
@@ -242,7 +235,25 @@ def products_categories():
     
     return render_template('products.html', title='Products', products=all_products)
 
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        search_query = request.form.get('search', '')
+    else:
+        search_query = request.args.get('search', '')
 
+    page=request.args.get('page', 1, type=int)
+    if search_query:
+        products = Product.query.filter(Product.name.ilike(f'%{search_query}%')).paginate(page=page, per_page=10)
+    else:
+        products = Product.query.paginate(page=page, per_page=10)
+
+    return render_template('products.html', products=products, search_query=search_query)
+
+        
+        
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
