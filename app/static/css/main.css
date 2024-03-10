@@ -1199,3 +1199,44 @@ a.article-title:hover {
     border-radius: 6px;
     transition: 0.25s ease;
 }
+
+.form-control-lg {
+    padding: .5rem .75rem; /* Adjust padding to make text boxes smaller */
+    font-size: .875rem; /* Adjust font size as needed */
+}
+
+/* Adjust width and padding for a more compact look */
+.form-control-lg {
+    max-width: 300px; /* Adjust width as needed */
+    margin: auto; /* Center the input boxes */
+}
+
+/* Smaller and more compact button */
+.btn-outline-info {
+    padding: .25rem .5rem; /* Adjust padding to make the button smaller */
+    font-size: .875rem; /* Adjust font size as needed */
+    max-width: 200px; /* Adjust button width as needed */
+    margin: 20px auto; /* Center the button and add some margin at the top */
+    display: block; /* Necessary to apply margin auto for centering */
+}
+.form-group, .form-group div, .btn-outline-info {
+    margin-left: 0 !important; /* Remove any auto margin */
+    align-items: flex-start; /* Align items to the start of the flex container */
+}
+
+/* Ensure inputs and button start from the left edge */
+.form-control-lg, .btn-outline-info {
+    width: auto; /* Allow the element to grow as needed, remove if fixed width is preferred */
+    margin-left: 0 !important; /* Remove any right margin if present */
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    width: auto;
+    margin-right: auto; /* Pushes the checkbox to the left */
+    margin-left: 5; /* Ensures it stays at the very left */
+}
