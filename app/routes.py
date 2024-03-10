@@ -115,27 +115,32 @@ def sell():
     return render_template('sell.html', title='New Product', form=form)
 
 @app.route('/add_to_wishlist', methods=['POST'])
-@login_required
-def handle_add_to_wishlist():
+def add_to_wishlist():
     if current_user.is_authenticated:
-        data = request.get_json()
+        data = request.json
         product_id = data.get('product_id')
+        user_id = current_user.id
 
-        wishlist_item = Wishlist(user_id=current_user.id, product_id=product_id)
+        # Check if the item is already in the user's wishlist
+        existing_item = Wishlist.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if existing_item:
+            return jsonify({'error': 'Product already in wishlist'}), 400
+
+        wishlist_item = Wishlist(user_id=user_id, product_id=product_id)
         db.session.add(wishlist_item)
         db.session.commit()
 
         return jsonify({'message': 'Product added to wishlist'}), 200
+    else:
+        return jsonify({'error': 'User not logged in'}), 401
 
 @app.route('/add_to_cart', methods=['POST'])
-@login_required
 def add_to_cart():
+    # Implement adding item to cart here (For both logged in and not logged in users)
     if current_user.is_authenticated:
         data = request.json
         product_id = data.get('productId')
         user_id = current_user.id
-        
-        # Check if the item is already in the user's cart
         existing_item = CartItem.query.filter_by(user_id=user_id, product_id=product_id).first()
         if existing_item:
             existing_item.quantity += 1
@@ -145,8 +150,9 @@ def add_to_cart():
         
         db.session.commit()
         return jsonify({'message': 'Product added to cart'})
-
-    # Implement adding item to cart here (For both logged in and not logged in users)
+    else:
+        flash('Please log in first.', 'error')
+        return jsonify({'error': 'User not logged in'}), 401
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -156,10 +162,8 @@ def allowed_file(filename):
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 @app.route('/upload', methods=['POST'])
 def upload_item():

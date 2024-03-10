@@ -50,7 +50,11 @@ $(document).ready(function () {
         console.log('Product added to cart');
       },
       error: function(xhr, status, error) {
-        console.error('Error adding product to cart:', error);
+        if (xhr.status === 401) {
+          alert('Please log in first.');
+        } else {
+          console.error('Error adding product to cart:', error);
+        }
       }
     });
   }
@@ -58,29 +62,29 @@ $(document).ready(function () {
   // Function to add product to wishlist
   $('.add-to-wishlist').click(function(event) {
     event.preventDefault();
-    const productId = $(this).data('productId'); 
+    const productId = $(this).data('productId');
     addToWishlist(productId);
   });
 
   function addToWishlist(productId) {
-    fetch('/add_to_wishlist', {
-      method: 'POST',
-      body: JSON.stringify({ product_id: productId }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Product added to wishlist');
-      } else {
-        console.error('Error adding product to wishlist');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
+    $.ajax({
+        url: '/add_to_wishlist',
+        type: 'POST',
+        data: JSON.stringify({ product_id: productId }),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('Product added to wishlist');
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 401) {
+                alert('Please log in first.');
+            } else {
+                console.error('Error adding product to wishlist:', error);
+            }
+        }
     });
   }
+
 
   // Play videos on hover
   const videos = document.querySelectorAll('.product-video');
