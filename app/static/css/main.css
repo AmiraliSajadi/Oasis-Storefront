@@ -787,6 +787,12 @@ h6 {
 
 }
 
+#section-banner .container{
+    padding: 0 80px;
+    width: 100%;
+
+}
+
 #section-banner .row {
     display: flex;
     justify-content: space-between;
@@ -805,6 +811,10 @@ h6 {
     background-size: cover;
     background-position: center;
     padding: 30px 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-left: 20px;
+    margin-left: 20px;
 }
 
 #section-banner .box-2 {
