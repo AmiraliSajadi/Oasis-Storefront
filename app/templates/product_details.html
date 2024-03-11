@@ -11,65 +11,21 @@
       </div>
       <div class="col-md-6">
         <h2>{{ product_detail.name }}</h2>
+        <br>
         <p class="price">${{ product_detail.price }}</p>
         <p>{{ product_detail.short_description }}</p>
-        <button class="btn btn-primary add-to-cart-btn" data-product-id="{{ product_detail.id }}">Add to Cart</button>
-        <br>
-        <a href="#" class="add-to-wishlist" data-product-id="{{ product_detail.id }}">Add to Wishlist</a>
-        <br>
-      </div>
-    </div>
-
-    <!-- Product Description -->
-    <div class="row">
-      <div class="col">
-        <h3>Description</h3>
         <p>{{ product_detail.full_description }}</p>
+
+        <!-- Button container to align buttons side by side -->
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary add-to-cart-btn" data-product-id="{{ product_detail.id }}">Add to Cart</button>
+          <button class="btn btn-primary add-to-wishlist" id="add-to-wishlist-btn" data-product-id="{{ product_detail.id }}">Wishlist</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Recommended Items -->
-<div class="recommended-items">
-  <div class="container">
-    <h3>Recommended for You</h3>
-    <div class="row">
-      <!-- Item -->
-      <div class="col-md-4">
-        <div class="item">
-          <!-- <img src="recommended-item1-image-url.jpg" alt="Item 1" class="img-fluid"> -->
-          <h4>Item 1 Name</h4>
-          <p>$29.99</p>
-          <a href="#" class="btn btn-outline-primary">View Item</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="item">
-          <!-- <img src="recommended-item2-image-url.jpg" alt="Item 2" class="img-fluid"> -->
-          <h4>Item 1 Name</h4>
-          <p>$29.99</p>
-          <a href="#" class="btn btn-outline-primary">View Item</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="item">
-          <!-- <img src="recommended-item3-image-url.jpg" alt="Item 3" class="img-fluid"> -->
-          <h4>Item 1 Name</h4>
-          <p>$29.99</p>
-          <a href="#" class="btn btn-outline-primary">View Item</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="item">
-          <!-- <img src="recommended-item4-image-url.jpg" alt="Item 4" class="img-fluid"> -->
-          <h4>Item 1 Name</h4>
-          <p>$29.99</p>
-          <a href="#" class="btn btn-outline-primary">View Item</a>
-        </div>
-      </div>
-      <!-- Repeat for other items -->
-    </div>
-  </div>
-</div>
+
 {% endblock %}

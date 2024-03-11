@@ -235,3 +235,25 @@ fetchWishlist();
 fetchCart();
 
 });
+
+
+document.getElementById('add-to-wishlist-btn').addEventListener('click', function() {
+    var productId = this.getAttribute('data-product-id');
+    fetch('/add_to_wishlist', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRFToken': '{{ csrf_token() }}' // Ensure you have CSRF protection
+        },
+        body: JSON.stringify({product_id: productId})
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // You can add code here to change the button state or update the UI
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
