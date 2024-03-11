@@ -144,6 +144,8 @@ h6 {
 
 .myslides {
     display: none;
+    position: absolute;
+    transition: transform 0.5s ease;
 }
 
 .slideshow-container {
@@ -502,6 +504,16 @@ h6 {
 
 .nav-open-btn:is(:hover, :focus) span:nth-child(2) {
     transform: scaleX(1);
+}
+
+
+#product-description .header-wrapper {
+    padding-top: 20px;
+}
+
+
+#product-description  .heading___3g-L_ {
+    margin-top: 20px;
 }
 
 

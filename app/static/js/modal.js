@@ -151,3 +151,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Add to cart and Add to wishlist functions for product.html
 
+// Image slider js
+
+var slideIndex = 0;
+showSlides();
+
+function plusSlides(n) {
+  slideIndex += n;
+  if (slideIndex >= slides.length) {
+    slideIndex = 0;
+  } else if (slideIndex < 0) {
+    slideIndex = slides.length - 1;
+  }
+  showSlides(true);
+}
+
+function currentSlide(n) {
+  slideIndex = n - 1;
+  showSlides(true);
+}
+
+function showSlides(manual = false) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+
+  slideIndex++;
+  if (slideIndex > slides.length) {
+    slideIndex = 1;
+  }
+
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
+
+  if (manual && window.slideTimeout) {
+    clearTimeout(window.slideTimeout);
+  }
+
+  window.slideTimeout = setTimeout(showSlides, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", showSlides);

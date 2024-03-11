@@ -105,7 +105,7 @@ def productsDetails(id):
 
 @app.route("/userProfile")
 def userProfile():
-    return render_template('userProfile.html', title='User Profile')
+    return render_template('user_settings.html', title='User Profile')
 
 @app.route("/user_settings")
 @login_required
@@ -261,12 +261,10 @@ def add_to_wishlist():
         product_id = data.get('product_id')
         user_id = current_user.id  # Use current_user.id for security
 
-        # Check if the item is already in the wishlist
         existing_item = Wishlist.query.filter_by(user_id=user_id, product_id=product_id).first()
         if existing_item:
             return jsonify({'message': 'Product already in wishlist'}), 200
 
-        # Add to wishlist if not already there
         new_wishlist_item = Wishlist(user_id=user_id, product_id=product_id)
         db.session.add(new_wishlist_item)
         db.session.commit()
@@ -274,44 +272,26 @@ def add_to_wishlist():
 
     return jsonify({'error': 'User not logged in'}), 401
 
-@app.route('/get_wishlist_items', methods=['GET'])
-@login_required
-def get_wishlist_items():
-    user_id = current_user.id
-    wishlist_items = Wishlist.query.filter_by(user_id=user_id).all()
-    items = []
-    for item in wishlist_items:
-        product = Product.query.get(item.product_id)
-        if product:
-            items.append({
-                'id': product.id,
-                'name': product.name,
-                'price': product.price,
-                'short_description': product.short_description,
-                'image_url': product.image_url,
-                'quantity': product.quantity
-            })
-    return jsonify(items)
-
-@app.route('/remove_wishlist_item/<int:item_id>', methods=['DELETE'])
-@login_required
-def remove_wishlist_item(item_id):
-    user_id = current_user.id
-    wishlist_item = Wishlist.query.filter_by(user_id=user_id, product_id=item_id).first()
-    if wishlist_item:
-        db.session.delete(wishlist_item)
-        db.session.commit()
-        return jsonify({'message': 'Wishlist item removed successfully'})
-    else:
-        return jsonify({'message': 'Wishlist item not found'}), 404
-
-
 # @app.route('/api/products')
 # def api_products():
 #     products = Product.query.all()
 #     products_data = [{'id': product.id, 'name': product.name, 'price': product.price} for product in products]  # Add other necessary fields
 #     return jsonify(products_data)
 
+
+
+@app.route("/user_wishlist/<int:user_id>")
+@login_required
+def user_wishlist(user_id):
+    if current_user.is_authenticated and current_user.id == user_id:
+        # Fetching products from the user's wishlist
+        wishlist_products = db.session.query(Product).join(Wishlist, Wishlist.product_id == Product.id).filter(Wishlist.user_id == user_id).all()
+
+        # Now you can pass these products to your template to display them
+        return render_template('user_wishlist.html', wishlist_products=wishlist_products)
+    else:
+        flash("You do not have permission to view this page.", "danger")
+        return redirect(url_for('home'))
 
 
 

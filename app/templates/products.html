@@ -5,12 +5,19 @@
 <section id="product-description">
     {% if products.items %}
     <div class="row">
-        <div class="header-wrapper">
+        <div class="header-wrapper" style="padding-top: 20px; padding-right:30px">
             <div class="searchterm" data-auto-id="plp-header-bar-search-container">
-                <div>search for:</div>
-                <h1 class="gl-vspace heading___3g-L_ heading--search" data-auto-id="plp-header-bar-search-title">
-                    “{{ search_query }}”</h1>
-                <div class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count">{{products.total}}</div>
+                {% if search_query%}
+                <div> &nbsp;&nbsp;  search for:</div>
+                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px; margin-right: 30px;">
+                    &nbsp;&nbsp;  “{{ search_query }}” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">{{products.total}}</span>
+                </h1>
+                {%else%}
+                <div>&nbsp;&nbsp;   search for:</div>
+                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px; margin-right: 30px;">
+                    &nbsp;&nbsp; “All Products” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">[{{products.total}}]</span>
+                </h1>
+                {%endif%}
             </div>
         </div>
     </div>
@@ -25,7 +32,7 @@
 
         {% for product in products.items %}
         <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" style = "height: 480px;">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" style="height: 480px;">
             <div class="product-info">
                 <span class="product-brand">{{ product.category.name }}</span>
                 <!-- Assuming category is included in product data -->
@@ -37,9 +44,9 @@
             </div>
             <!-- <button class="heart-button" >❤</button> -->
             <div class="item-card" data-product-id="{{ product.id }}"
-            data-user-id="{{ current_user.id if current_user.is_authenticated else 'none' }}">
-            <button class="heart-button">🤍</button> <!-- Ensure this line is present -->
-          </div>
+                data-user-id="{{ current_user.id if current_user.is_authenticated else 'none' }}">
+                <button class="heart-button">🤍</button> <!-- Ensure this line is present -->
+            </div>
             <button class="add-button"><i class="fa fa-shopping-cart"></i></button>
         </div>
         {% endfor %}
