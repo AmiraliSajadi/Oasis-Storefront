@@ -508,12 +508,25 @@ h6 {
 
 
 #product-description .header-wrapper {
-    padding-top: 20px;
+    flex: 0 0 35%;
+
+}
+
+#product-description .blank-div {
+    flex-grow: 1;
+}
+#product-description .searchterm {
+    padding-right: 30px; /* If you need padding inside the searchterm */
 }
 
 
 #product-description  .heading___3g-L_ {
     margin-top: 20px;
+}
+
+#product-description .flex-container {
+display: flex;
+    width: 100%;
 }
 
 
@@ -973,7 +986,9 @@ a.article-title:hover {
 
 #product-description .multicard {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: left;
     /* align-items: center; */
     padding: 20px;
     flex-wrap: wrap;
@@ -991,6 +1006,8 @@ a.article-title:hover {
     cursor: pointer;
     transition: 0.2s ease;
     position: relative;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 #product-description .product-card:hover {
@@ -999,6 +1016,7 @@ a.article-title:hover {
 
 #product-description .product-card img {
     width: 100%;
+    display: block;
     border-radius: 20px;
 }
 
@@ -1262,18 +1280,13 @@ a.article-title:hover {
 .form-group div,
 .btn-outline-info {
     margin-left: 0 !important;
-    /* Remove any auto margin */
     align-items: flex-start;
-    /* Align items to the start of the flex container */
 }
 
-/* Ensure inputs and button start from the left edge */
 .form-control-lg,
 .btn-outline-info {
     width: auto;
-    /* Allow the element to grow as needed, remove if fixed width is preferred */
     margin-left: 0 !important;
-    /* Remove any right margin if present */
 }
 
 .form-check {
@@ -1284,9 +1297,7 @@ a.article-title:hover {
 .form-check-input {
     width: auto;
     margin-right: auto;
-    /* Pushes the checkbox to the left */
     margin-left: 5;
-    /* Ensures it stays at the very left */
 }
 
 
@@ -1300,7 +1311,6 @@ a.article-title:hover {
 .footer_container {
     display: grid;
     grid-template-columns: 25% 15% 60%;
-    /* justify-self: center; */
     column-gap: 2rem;
     margin-top: 2rem;
 }

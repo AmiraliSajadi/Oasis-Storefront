@@ -2,29 +2,46 @@
 
 {% block content %}
 
+<style>
+    /* You can define your custom styles here or in an external stylesheet */
+    .search-term {
+        font-family: Arial, sans-serif; /* Change the font-family as needed */
+    }
+
+    .search-query {
+        font-family: "Lucida Console", Monaco; font-style: italic;/* Change the font-family as needed */
+    }
+</style>
+
 <section id="product-description">
     {% if products.items %}
-    <div class="row">
-        <div class="header-wrapper" style="padding-top: 20px; padding-right:30px">
+    <div class="flex-container">
+        <!-- This div will take up 35% of the space -->
+        <div class="header-wrapper" style="padding-top: 20px;">
             <div class="searchterm" data-auto-id="plp-header-bar-search-container">
-                {% if search_query%}
-                <div> &nbsp;&nbsp;  search for:</div>
-                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px; margin-right: 30px;">
-                    &nbsp;&nbsp;  “{{ search_query }}” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">{{products.total}}</span>
+                {% if search_query %}
+                <div>search for:</div>
+                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px;">
+                    “{{ search_query }}” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">{{ products.total }}</span>
                 </h1>
-                {%else%}
-                <div>&nbsp;&nbsp;   search for:</div>
-                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px; margin-right: 30px;">
-                    &nbsp;&nbsp; “All Products” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">[{{products.total}}]</span>
+                {% else %}
+                <div>search for:</div>
+                <h1 class="gl-vspace heading___3g-L_ heading--search" style="margin-top: 20px;">
+                    “All Products” <span class="count___11uU6 gl-body--s" data-auto-id="plp-header-bar-products-count" style="font-size: 12px;">[{{ products.total }}]</span>
                 </h1>
-                {%endif%}
+                {% endif %}
             </div>
         </div>
+        
+        <!-- This div will be blank and take up the remaining 65% of the space -->
+        <div class="blank-div"></div>
     </div>
-
-
-
     {% endif %}
+</section>
+
+<hr>
+
+<section id="product-description">
 
 
     <div class="multicard">
