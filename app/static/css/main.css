@@ -215,11 +215,36 @@ h6 {
     background-color: #717171;
 }
 
+
+.slideOut {
+    -webkit-animation-name: slideOut; /* For Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 3s; /* For Safari 4.0 - 8.0 */
+    animation-name: slideOut;
+    animation-duration: 3s;
+}
+
+.slideIn {
+    -webkit-animation-name: slideIn; /* For Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 3s; /* For Safari 4.0 - 8.0 */
+    animation-name: slideIn;
+    animation-duration: 3s;
+}
+
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {
+        font-size: 11px;
+    }
+    .dot {
+        height: 8px;
+        width: 8px;
+    }
+}
+ 
 .fade {
     -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
+    -webkit-animation-duration: 3s;
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 3s;
 }
 
 @-webkit-keyframes fade {
@@ -234,13 +259,14 @@ h6 {
 
 @keyframes fade {
     from {
-        opacity: .4
+      transform: translateX(0);
+      opacity: 0;
     }
-
     to {
-        opacity: 1
+      transform: translateX(0);
+      opacity: 1;
     }
-}
+  }
 
 @media only screen and (max-width: 300px) {
 
@@ -255,9 +281,7 @@ h6 {
         width: 8px;
     }
 
-    /* .slideshow-container{
-        max-width: 100%;
-    } */
+
 }
 
 /* Features items card */
@@ -812,9 +836,11 @@ display: flex;
 
 }
 
-#section-banner .container {
-    padding: 0 80px;
+#section-banner .banner-container {
+    /* padding: 0 80px; */
     width: 100%;
+    padding-top: 100px;
+    padding-bottom: 50px;
 
 }
 
@@ -830,16 +856,16 @@ display: flex;
     justify-content: center;
     align-items: flex-start;
     text-align: center;
-    background-image: url("../img/banner/b17.jpg");
+    background-image: url("../img/banner/imac.jpeg");
     min-width: 500px;
     height: 50vh;
     background-size: cover;
     background-position: center;
     padding: 30px 80px;
-    padding-left: 40px;
+    /* padding-left: 40px;
     padding-right: 40px;
     margin-left: 20px;
-    margin-left: 20px;
+    margin-left: 20px; */
 }
 
 #section-banner .box-2 {
@@ -849,7 +875,7 @@ display: flex;
 }
 
 #section-banner h4 {
-    color: #ffffff;
+    color: #bff5b9;
     font-size: 20px;
     font-weight: 300;
     margin-bottom: 20px;

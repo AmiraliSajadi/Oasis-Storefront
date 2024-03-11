@@ -3,23 +3,27 @@
 
 {%block main_content%}
 
+
+
+
+
 <!-- <main> -->
-<article>
+<artic>
   <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="../static/img/img-slider/Dell-Homepage-Banner.jpg" style="width:100%; height:700px;">
+    <div class="mySlides">
+      <img src="../static/img/img-slider/960.jpg" style="width:100%; height:750px;">
       <div class="text">Dell Laptop</div>
     </div>
-    <div class="mySlides fade">
-      <img src="../static/img/img-slider/ipad.png" style="width:100%; height:700px;">
+    <div class="mySlides">
+      <img src="../static/img/img-slider/ipad.png" style="width:100%; height:750px;">
       <div class="text">Apple Ipad</div>
     </div>
-    <div class="mySlides fade">
-      <img src="../static/img/img-slider/Top-games-and-Immortal-headphones.jpg" style="width:100%; height:700px;">
+    <div class="mySlides">
+      <img src="../static/img/img-slider/Top-games-and-Immortal-headphones.jpg" style="width:100%; height:750px;">
       <div class="text">Headphones</div>
     </div>
-    <div class="mySlides fade">
-      <img src="../static/img/img-slider/watch.png" style="width:100%; height:700px;">
+    <div class="mySlides">
+      <img src="../static/img/img-slider/watch.png" style="width:100%; height:750px;">
       <div class="text">Apple Watch</div>
     </div>
 
@@ -35,9 +39,7 @@
     <span class="dot" onclick="currentSlide(3)"></span>
     <span class="dot" onclick="currentSlide(4)"></span>
   </div>
-</article>
-
-
+</artic
 <!-- </main> -->
 <!-- ------------------ -->
 <!-- Shop by Categories -->
@@ -404,22 +406,25 @@
 <!-- #### Featured-img -->
 
 <div class="banner" id="section-banner">
-  <div class="container">
+  <div class="banner-container">
     <div class="row">
       <div class="col-md-6">
-        <h4>Crazy Deals</h4>
-        <h2>Buy 1 Get 1 Free!</h2>
-        <span>On all products</span>
-        <span>The best is on Sale</span>
-        <button class="white">Shop Now</button>
+        <!-- <h4>Crazy Deals</h4> -->
+        <h2>iMazing Deals:</h2>
+        <span>Your Ultimate Destination</span>
+        <span>for iMac Excellence</span>
+        <a href="{{ url_for('products', category_name='Electronics') }}">
 
+        <button class="white">Secure Now</button>
+        </a>
       </div>
       <div class="col-md-6 box-2">
         <h4>Eye Catching</h4>
         <h2>Upcoming Season</h2>
         <span>The best is on sale</span>
-        <button class="white">Grab Now!</button>
-
+        <a href="{{ url_for('products', category_name='Clothing') }}">
+        <button class="white" >Grab Now!</button>
+          </a>
       </div>
     </div>
   </div>

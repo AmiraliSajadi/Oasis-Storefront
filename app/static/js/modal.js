@@ -198,3 +198,45 @@ function showSlides(manual = false) {
 }
 
 document.addEventListener("DOMContentLoaded", showSlides);
+
+
+
+let currentSlideIndex = 0;
+
+function plusSlides(n) {
+  // Determine the new index
+  let newSlideIndex = currentSlideIndex + n;
+
+  // Wrap around if index is out of bounds
+  if (newSlideIndex >= slides.length) {
+    newSlideIndex = 0;
+  } else if (newSlideIndex < 0) {
+    newSlideIndex = slides.length - 1;
+  }
+
+  // Apply the slideOut class to the current slide
+  slides[currentSlideIndex].classList.add('slideOut');
+  slides[currentSlideIndex].classList.remove('slideIn');
+
+  // After the animation completes, hide the current slide and show the new one
+  setTimeout(() => {
+    slides[currentSlideIndex].classList.remove('slideOut');
+    slides[currentSlideIndex].style.display = 'none';
+
+    // Apply the slideIn class to the new slide
+    slides[newSlideIndex].classList.add('slideIn');
+    slides[newSlideIndex].style.display = 'block';
+
+    // Update the current slide index
+    currentSlideIndex = newSlideIndex;
+  }, 3000); // The timeout should match the animation-duration
+
+  // Update dots or other indicators if necessary
+}
+
+// Initial setup
+let slides = document.getElementsByClassName("mySlides");
+if (slides.length > 0) {
+  slides[0].style.display = 'block';
+  slides[0].classList.add('slideIn');
+}
