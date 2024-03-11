@@ -29,9 +29,9 @@
 </div>
 
 <!-- Wishlist Section -->
-<h2> My Wishlist</h2>
+<!-- <h2> My Wishlist</h2> -->
 
-<section id="product-description">
+<!-- <section id="product-description">
 
   <div class="multicard">
     {% if wishlist_products %}
@@ -55,10 +55,10 @@
     {% endif %}
   </div>
 
-</section>
+</section> -->
 
-<h2>Items You Are Selling</h2>
-<section id="product-description">
+<!-- <h2>Items You Are Selling</h2> -->
+<!-- <section id="product-description">
 
   <div class="multicard">
     {% if products_group_2 %}
@@ -73,10 +73,9 @@
         </div>
         <div class="price">${{ product.price }}</div>
       </div>
-      <!-- <button class="heart-button">❤</button> -->
       <div class="item-card" data-product-id="{{ product.id }}"
         data-user-id="{{ current_user.id if current_user.is_authenticated else 'none' }}">
-        <button class="heart-button">🤍</button> <!-- Ensure this line is present -->
+        <button class="heart-button">🤍</button> 
       </div>
       <button class="add-button"><i class="fa fa-shopping-cart"></i></button>
     </div>
@@ -86,7 +85,7 @@
     {% endif %}
   </div>
 
-</section>
+</section> -->
 
 
 {% endblock %}

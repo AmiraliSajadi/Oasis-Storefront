@@ -9,7 +9,10 @@ VALUES ('user2', 'user2@example.com', '456');
 INSERT INTO category (name, description)
 VALUES 
 	('Electronics', 'Electronic devices and gadgets'),
-	('Clothing', 'Clothing items and accessories');
+	('Clothing', 'Clothing items and accessories'),
+	('Home & Gardening', 'Home and gardening products and accessories'),
+	('Sports', 'Sports equipment and gear'),
+	('Toys', 'Toys and games for children and adults');
 	
 -- Insert products with details
 INSERT INTO product (name, user_id, price, short_description, full_description, image_url, category_id, quantity)
