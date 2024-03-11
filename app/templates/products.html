@@ -49,7 +49,7 @@
 
         {% for product in products.items %}
         <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" style="height: 480px;">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" style="height: 380px;">
             <div class="product-info">
                 <span class="product-brand">{{ product.category.name }}</span>
                 <!-- Assuming category is included in product data -->
