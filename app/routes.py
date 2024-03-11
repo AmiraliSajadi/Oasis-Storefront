@@ -274,6 +274,25 @@ def add_to_wishlist():
 
     return jsonify({'error': 'User not logged in'}), 401
 
+@app.route('/get_wishlist_items', methods=['GET'])
+@login_required
+def get_wishlist_items():
+    user_id = current_user.id
+    wishlist_items = Wishlist.query.filter_by(user_id=user_id).all()
+    items = []
+    for item in wishlist_items:
+        product = Product.query.get(item.product_id)
+        if product:
+            items.append({
+                'id': product.id,
+                'name': product.name,
+                'price': product.price,
+                'short_description': product.short_description,
+                'image_url': product.image_url,
+                'quantity': product.quantity
+            })
+    return jsonify(items)
+
 # @app.route('/api/products')
 # def api_products():
 #     products = Product.query.all()
