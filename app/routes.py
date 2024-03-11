@@ -15,6 +15,8 @@ from werkzeug.utils import secure_filename
 @app.route("/")
 @app.route("/home")
 def home():
+    categories = Category.query.all()
+
     product_ids_group_1 = [1, 2, 3, 4] 
     product_ids_group_2 = [15, 6, 7, 18] 
 
@@ -25,7 +27,12 @@ def home():
     print("Group 1:", products_group_1)  
     print("Group 2:", products_group_2)  
 
-    return render_template('home.html', products_group_1=products_group_1, products_group_2=products_group_2)
+    return render_template('home.html',categories=categories, products_group_1=products_group_1, products_group_2=products_group_2)
+
+@app.context_processor
+def inject_categories():
+    categories = Category.query.all()
+    return dict(categories=categories)
 
 
 @app.route("/about")
@@ -88,14 +95,23 @@ def contact():
     return render_template('contact.html', title='Contact')
 
 @app.route("/products")
-def products():
+@app.route("/products/<category_name>")
+def products(category_name=None):
 
     page = request.args.get('page', 1, type=int)
-    all_products = Product.query.paginate(page=page, per_page=10)
 
+    if category_name:
+        category = Category.query.filter_by(name=category_name).first()
+        if category:
+            all_products = Product.query.filter_by(category_id=category.id).paginate(page=page, per_page=10)
+        else:
+            all_products = None
+            flash('No such category found.', 'warning')
+    else:
+        all_products = Product.query.paginate(page=page, per_page=10)
 
     
-    return render_template('products.html', title='Products', products=all_products)
+    return render_template('products.html', title='Products' if not category_name else category_name, products=all_products)
 
 @app.route("/product_details/<int:id>", methods=['GET'])
 def productsDetails(id):
@@ -399,6 +415,8 @@ def user_wishlist(user_id):
     else:
         flash("You do not have permission to view this page.", "danger")
         return redirect(url_for('home'))
+
+
 
 
 
