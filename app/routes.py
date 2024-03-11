@@ -189,11 +189,39 @@ def update_cart_quantity():
         cart_item.quantity += change
         if cart_item.quantity <= 0:
             db.session.delete(cart_item)
-        else:
-            db.session.commit()
+        db.session.commit()
     
     return jsonify({'message': 'Cart quantity updated successfully'})
 
+@app.route('/update_product_quantities', methods=['POST'])
+@login_required
+def update_product_quantities():
+    user_id = current_user.id
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    
+    # Update product quantities based on cart items
+    for item in cart_items:
+        product = Product.query.get(item.product_id)
+        if product:
+            product.quantity -= item.quantity
+    
+    db.session.commit()
+    
+    return jsonify({'message': 'Product quantities updated successfully'})
+
+@app.route('/clear_cart', methods=['DELETE'])
+@login_required
+def clear_cart():
+    user_id = current_user.id
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    
+    # Delete all cart items
+    for item in cart_items:
+        db.session.delete(item)
+    
+    db.session.commit()
+    
+    return jsonify({'message': 'Cart cleared successfully'})
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}

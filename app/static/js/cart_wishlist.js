@@ -195,9 +195,41 @@ function updateQuantity(productId, change) {
 
 // Event listener for finalize transaction button
 $('#finalizeTransactionBtn').on('click', function() {
-  alert("Transaction Done")
-  // Implement logic to finalize transaction (update product numbers, etc.)
+  alert("Transaction Done");
+  updateProductQuantities();
+  fetchCart();
 });
+
+// Function to update product quantities
+function updateProductQuantities() {
+  $.ajax({
+      url: '/update_product_quantities',
+      type: 'POST',
+      contentType: 'application/json',
+      success: function(response) {
+          // Clear the cart after successful transaction
+          clearCart();
+      },
+      error: function(xhr, status, error) {
+          console.error('Error updating product quantities:', error);
+      }
+  });
+}
+
+// Function to clear the cart
+function clearCart() {
+  $.ajax({
+      url: '/clear_cart',
+      type: 'DELETE',
+      success: function(response) {
+          fetchCart(); // Refresh the cart after clearing
+      },
+      error: function(xhr, status, error) {
+          console.error('Error clearing cart:', error);
+      }
+  });
+}
+
 
 fetchWishlist();
 fetchCart();
