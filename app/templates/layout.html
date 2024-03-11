@@ -44,34 +44,58 @@
 
       </div>
 
-      <div class="header-actions">
+      <div class="header-actions" id = "nav-btns">
 
-        <button class="header-action-btn" id="signInLink">
+        <!-- <button class="header-action-btn" id="signInLink">
           <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
 
           <p class="header-action-label">Sign in</p>
-        </button>
+        </button> -->
 
-        <button class="header-action-btn">
+
+
+        
+ <!-- loginbutton  -->
+
+        <button class="header-action-btn dropdown">
           <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
 
-          <p class="header-action-label">Search</p>
+          <p class="header-action-label"><i class="fa-solid fa-user"></i></p>
+          {% if not current_user.is_authenticated%}
+          <div class="dropdown-content">
+            <a href="{{url_for('login')}}" class="navbar-link">Login</a>
+            <a href="{{url_for('register')}}" class="navbar-link">Register</a>
+          </div>
+          {% else %}
+          <div class="dropdown-content">
+            <a href="{{url_for('userProfile')}}" class="navbar-link">Profile</a>
+            <a href="{{url_for('logout')}}" class="navbar-link">Logout</a>
+          </div>
+          {% endif %}
+
         </button>
 
-        {% if current_user.is_authenticated %}
+        <button class="header-action-btn dropdown">
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+          <p class="header-action-label">tempSignIn</p>
+          <div class="dropdown-content">
+            <a href="{{url_for('login')}}" class="navbar-link">Login</a>
+            <a href="{{url_for('register')}}" class="navbar-link">Register</a>
+          </div>
+        </button>
+
         <button class="header-action-btn" data-toggle="modal" data-target="#cartModal" id="cartButton">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
-          <p class="header-action-label">Cart</p>
+          <p class="header-action-label"><i class="fa-solid fa-cart-shopping"></i></p>
         </button>
 
         <button class="header-action-btn" id="wishlistButton">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
-          <p class="header-action-label">Wishlist</p>
+          <p class="header-action-label"><i class="fa-solid fa-heart"></i></p>
 
           <!-- <div class="btn-badge" aria-hidden="true">2</div> -->
         </button>
-        {% endif %}
 
       </div>
 
@@ -104,27 +128,29 @@
           <li>
             <a href="{{url_for('about')}}" class="navbar-link">About</a>
           </li>
-          <!-- <li>
-            <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
-          </li> -->
-          {% if current_user.is_authenticated%}
+
           <li>
+            {% if current_user.is_authenticated%}
+
             <a href="{{url_for('sell')}}" class="navbar-link">Sell</a>
+            {%else%}
+            <a href="{{url_for('login')}}" class="navbar-link">Sell</a>
+            {%endif%}
+
           </li>
-          <li>
-            <a href="{{url_for('logout')}}" class="navbar-link">Log out</a>
-          </li>
-          <li>
-            <a href="{{url_for('userProfile')}}" class="navbar-link">User</a>
-          </li>
-          {%else%}
-          <li>
-            <a href="{{url_for('login')}}" class="navbar-link">Login</a>
-          </li>
-          <li>
-            <a href="{{url_for('register')}}" class="navbar-link">Register</a>
-          </li>
-          {%endif%}
+          <li class="dropdown">
+            <a href="#" class="navbar-link">Categories</a>
+            <div class="dropdown-content">
+              <a href="#" class="navbar-link">Electronics</a>
+              <a href="#" class="navbar-link">Clothings</a>
+              <a href="#" class="navbar-link">Home and Garderns</a>
+              <a href="#" class="navbar-link">Sports</a>
+              <a href="#" class="navbar-link">Toys</a>
+
+
+              <!-- Add more categories as needed -->
+            </div>
+
         </ul>
 
       </nav>
@@ -142,7 +168,8 @@
   <div class="footer">
     <div class="footer_container grid">
       <div class="footer_content">
-        <a href="{{url_for('home')}}" class="footer_logo"><img src="../static/img/logo1.png" alt="Oasis logo" width="130" height="45"></a>
+        <a href="{{url_for('home')}}" class="footer_logo"><img src="../static/img/logo1.png" alt="Oasis logo"
+            width="130" height="45"></a>
 
         <p class="footer_description">We help people to find their lives better <br> with our products</p>
 
@@ -260,7 +287,7 @@
 
 
 
-  
+
   <div id="cartSidebar" class="sidebar">
     <div style="width: 100%; height: 150px;"></div>
     <p>Your Cart Items:</p>
@@ -269,10 +296,10 @@
     <button id="finalizeTransactionBtn">Finalize Transaction</button>
   </div>
 
-  <div id="wishlistSidebar" class="sidebar">  
+  <div id="wishlistSidebar" class="sidebar">
     <div style="width: 100%; height: 150px;"></div>
     <p>Your Wishlist Items:</p>
-    <ol id="wishlistItems"></ol> 
+    <ol id="wishlistItems"></ol>
   </div>
 
   <!-- </article> -->
