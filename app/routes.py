@@ -145,6 +145,84 @@ def add_to_cart():
         flash('Please log in first.', 'error')
         return jsonify({'error': 'User not logged in'}), 401
 
+@app.route('/get_cart_items', methods=['GET'])
+@login_required
+def get_cart_items():
+    user_id = current_user.id
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    items = []
+    for item in cart_items:
+        product = Product.query.get(item.product_id)
+        if product:
+            items.append({
+                'id': product.id,
+                'name': product.name,
+                'price': product.price,
+                'short_description': product.short_description,
+                'quantity': item.quantity  # Include quantity from the cart
+            })
+    return jsonify(items)
+
+@app.route('/remove_cart_item/<int:item_id>', methods=['DELETE'])
+@login_required
+def remove_cart_item(item_id):
+    user_id = current_user.id
+    cart_item = CartItem.query.filter_by(user_id=user_id, product_id=item_id).first()
+    if cart_item:
+        db.session.delete(cart_item)
+        db.session.commit()
+        return jsonify({'message': 'Cart item removed successfully'})
+    else:
+        return jsonify({'message': 'Cart item not found'}), 404
+
+@app.route('/update_cart_quantity', methods=['POST'])
+@login_required
+def update_cart_quantity():
+    data = request.json
+    product_id = data.get('productId')
+    change = data.get('change')
+    user_id = current_user.id
+    
+    # Update the quantity of the cart item
+    cart_item = CartItem.query.filter_by(user_id=user_id, product_id=product_id).first()
+    if cart_item:
+        cart_item.quantity += change
+        if cart_item.quantity <= 0:
+            db.session.delete(cart_item)
+        db.session.commit()
+    
+    return jsonify({'message': 'Cart quantity updated successfully'})
+
+@app.route('/update_product_quantities', methods=['POST'])
+@login_required
+def update_product_quantities():
+    user_id = current_user.id
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    
+    # Update product quantities based on cart items
+    for item in cart_items:
+        product = Product.query.get(item.product_id)
+        if product:
+            product.quantity -= item.quantity
+    
+    db.session.commit()
+    
+    return jsonify({'message': 'Product quantities updated successfully'})
+
+@app.route('/clear_cart', methods=['DELETE'])
+@login_required
+def clear_cart():
+    user_id = current_user.id
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    
+    # Delete all cart items
+    for item in cart_items:
+        db.session.delete(item)
+    
+    db.session.commit()
+    
+    return jsonify({'message': 'Cart cleared successfully'})
+
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
