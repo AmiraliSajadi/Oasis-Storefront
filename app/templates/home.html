@@ -136,7 +136,6 @@
       --text-color: 26, 32, 36;
       --section-background: 255, 255, 255;
     }
-
   </style>
 
   <section class=" ">
@@ -151,23 +150,25 @@
           <div class="vid__container">
 
 
-
             <div class="card" muted tab id="smartwatches">
-              <article class="card__article">
+              <a href="{{ url_for('productsDetails', id=1) }}">
+              <article class= "card__article">
 
-                <video class="product-video" muted loop>
-                  <source src="../static/img/BestSellerVid/iphone.mov" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="card__data">
-                  <span class="card__description">Apple</span>
-                  <h2 class="card__title">iPhone 14</h2>
-                  <a href="#" class="card__button">$800</a>
-                </div>
+              <video class="product-video" muted loop>
+                <source src="../static/img/BestSellerVid/iphone.mov" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="card__data">
+                <span class="card__description">Apple</span>
+                <h2 class="card__title">iPhone 14</h2>
+                <h2 href="#" class="card__button">$800</h2>
+              </div>
               </article>
+            </a>
             </div>
 
             <div class="card" id="smartwatches">
+              <a href="{{ url_for('productsDetails', id=1) }}">
               <article class="card__article">
 
                 <video class="product-video" muted loop>
@@ -178,12 +179,14 @@
                 <div class="card__data">
                   <span class="card__description">Smartwatch</span>
                   <h2 class="card__title">Amazfit</h2>
-                  <a href="#" class="card__button">$58</a>
+                  <h2 href="#" class="card__button">$58</h2>
                 </div>
               </article>
+            </a>
             </div>
 
             <div class="card" id="smartwatches">
+              <a href="{{ url_for('productsDetails', id=1) }}">
               <article class="card__article">
 
                 <video class="product-video" muted loop>
@@ -193,12 +196,14 @@
                 <div class="card__data">
                   <span class="card__description">Apple</span>
                   <h2 class="card__title">MacBook Pro</h2>
-                  <a href="#" class="card__button">$1600</a>
+                  <h2 href="#" class="card__button">$1600</h2>
                 </div>
               </article>
+            </a>
             </div>
 
             <div class="card" id="smartwatches">
+              <a href="{{ url_for('productsDetails', id=1) }}">
               <article class="card__article">
 
                 <video class="product-video" muted loop>
@@ -208,12 +213,14 @@
                 <div class="card__data">
                   <span class="card__description">Samsung</span>
                   <h2 class="card__title">Galaxy Buds 2</h2>
-                  <a href="#" class="card__button">$78</a>
+                  <h2 href="#" class="card__button">$78</h2>
                 </div>
               </article>
+            </a>
             </div>
 
             <div class="card" id="smartwatches">
+              <a href="{{ url_for('productsDetails', id=1) }}">
               <article class="card__article">
 
                 <video class="product-video" muted loop>
@@ -223,11 +230,11 @@
                 <div class="card__data">
                   <span class="card__description">Apple</span>
                   <h2 class="card__title">Vision Pro</h2>
-                  <a href="#" class="card__button">$3500</a>
+                  <h2 href="#" class="card__button">$3500</h2>
                 </div>
               </article>
+            </a>
             </div>
-
           </div>
         </div>
 
@@ -250,7 +257,8 @@
       --text-color: 26, 32, 36;
       --section-background: 255, 255, 255;
     }
-    .shopifycustom-html{
+
+    .shopifycustom-html {
       padding-top: 30px;
     }
   </style>
@@ -292,7 +300,8 @@
       <div class="text-overlay">
         <h1 class="" color="white">GEAR UP <br> FOR SPRING SPORTS</h1>
         <h2 class="">EXPLORE NEW IN SOCCER</h2>
-        <div class="overlay-btn"><a class="btn btn-light half-width-btn" href="{{ url_for('products', category_name='Clothing') }}" width="50%">SHOP NOW</a></div>
+        <div class="overlay-btn"><a class="btn btn-light half-width-btn"
+            href="{{ url_for('products', category_name='Clothing') }}" width="50%">SHOP NOW</a></div>
       </div>
     </section>
   </div>
@@ -336,7 +345,7 @@
     {% for product in products_group_1 %}
     <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
 
-      <img src="{{ product.image_url }}" alt="{{ product.name }}" style = "height: 480px">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" style="height: 480px">
       <div class="product-info">
         <span class="product-brand">{{ product.category.name }}</span>
         <div class="product-name">
@@ -399,7 +408,7 @@
     {% for product in products_group_2 %}
     <div class="product-card" onclick="redirectToProductDetails('{{ product.id }}')">
 
-      <img src="{{ product.image_url }}" alt="{{ product.name }}" style = "height: 480px">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" style="height: 480px">
       <div class="product-info">
         <span class="product-brand">{{ product.category.name }}</span>
         <div class="product-name">
@@ -435,7 +444,7 @@
         <span>for iMac Excellence</span>
         <a href="{{ url_for('products', category_name='Electronics') }}">
 
-        <button class="white">Secure Now</button>
+          <button class="white">Secure Now</button>
         </a>
       </div>
       <div class="col-md-6 box-2">
@@ -443,8 +452,8 @@
         <h2>Upcoming Season</h2>
         <span>The best is on sale</span>
         <a href="{{ url_for('products', category_name='Clothing') }}">
-        <button class="white" >Grab Now!</button>
-          </a>
+          <button class="white">Grab Now!</button>
+        </a>
       </div>
     </div>
   </div>
