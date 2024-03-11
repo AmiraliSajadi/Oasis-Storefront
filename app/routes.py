@@ -17,8 +17,8 @@ from werkzeug.utils import secure_filename
 def home():
     categories = Category.query.all()
 
-    product_ids_group_1 = [1, 2, 3, 4] 
-    product_ids_group_2 = [15, 6, 7, 18] 
+    product_ids_group_1 = [15, 14, 3, 4] 
+    product_ids_group_2 = [15, 13,14, 16] 
 
     # Fetch products that match the provided IDs
     products_group_1 = Product.query.filter(Product.id.in_(product_ids_group_1)).all()
