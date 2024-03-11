@@ -15,7 +15,18 @@ from werkzeug.utils import secure_filename
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    product_ids_group_1 = [1, 2, 3, 4] 
+    product_ids_group_2 = [15, 6, 7, 18] 
+
+    # Fetch products that match the provided IDs
+    products_group_1 = Product.query.filter(Product.id.in_(product_ids_group_1)).all()
+    products_group_2 = Product.query.filter(Product.id.in_(product_ids_group_2)).all()
+
+    print("Group 1:", products_group_1)  
+    print("Group 2:", products_group_2)  
+
+    return render_template('home.html', products_group_1=products_group_1, products_group_2=products_group_2)
+
 
 @app.route("/about")
 def about():
@@ -93,26 +104,6 @@ def sell():
         flash('New product created successfully!', 'success')
         return redirect(url_for('home'))
     return render_template('sell.html', title='New Product', form=form)
-
-@app.route('/add_to_wishlist', methods=['POST'])
-def add_to_wishlist():
-    if current_user.is_authenticated:
-        data = request.json
-        product_id = data.get('product_id')
-        user_id = current_user.id
-
-        # Check if the item is already in the user's wishlist
-        existing_item = Wishlist.query.filter_by(user_id=user_id, product_id=product_id).first()
-        if existing_item:
-            return jsonify({'error': 'Product already in wishlist'}), 400
-
-        wishlist_item = Wishlist(user_id=user_id, product_id=product_id)
-        db.session.add(wishlist_item)
-        db.session.commit()
-
-        return jsonify({'message': 'Product added to wishlist'}), 200
-    else:
-        return jsonify({'error': 'User not logged in'}), 401
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
@@ -204,17 +195,7 @@ def upload_item():
 @app.route("/products/<int:id>", methods=['GET'])
 def products_categories():
     page = request.args.get('page', 1, type=int)
-    # c_products = Product.query.filter_by(category_id=id).paginate(page=page, per_page=10)
-    all_products = Product.query.paginate(page=page, per_page=10)
-    
-    # products_data = [{
-    #     'id' : product.id,
-    #     'name': product.name,
-    #     'price': product.price,
-    #     'short_description': product.short_description,
-    #     'image_url': product.image_url,
-    #     'quantity': product.quantity
-    # } for product in all_products]
+    all_products = Product.query.paginate(page=page, per_page=10) 
     
     return render_template('products.html', title='Products', products=all_products)
 
@@ -234,9 +215,53 @@ def search():
     return render_template('products.html', products=products, search_query=search_query)
 
         
-        
+@app.route('/remove_from_wishlist', methods=['POST'])
+@login_required
+def remove_from_wishlist():
+    if current_user.is_authenticated:
+        data = request.json
+        product_id = data.get('product_id')
+        user_id = current_user.id
+
+        # Find the wishlist item and remove it
+        Wishlist.query.filter_by(user_id=user_id, product_id=product_id).delete()
+        db.session.commit()
+
+        return jsonify({'message': 'Product removed from wishlist'}), 200
+    else:
+        return jsonify({'error': 'User not logged in'}), 401
 
     
+@app.route('/add_to_wishlist', methods=['POST'])
+@login_required
+def add_to_wishlist():
+    if current_user.is_authenticated:
+        data = request.json
+        product_id = data.get('product_id')
+        user_id = current_user.id  # Use current_user.id for security
+
+        # Check if the item is already in the wishlist
+        existing_item = Wishlist.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if existing_item:
+            return jsonify({'message': 'Product already in wishlist'}), 200
+
+        # Add to wishlist if not already there
+        new_wishlist_item = Wishlist(user_id=user_id, product_id=product_id)
+        db.session.add(new_wishlist_item)
+        db.session.commit()
+        return jsonify({'message': 'Product added to wishlist'}), 201
+
+    return jsonify({'error': 'User not logged in'}), 401
+
+# @app.route('/api/products')
+# def api_products():
+#     products = Product.query.all()
+#     products_data = [{'id': product.id, 'name': product.name, 'price': product.price} for product in products]  # Add other necessary fields
+#     return jsonify(products_data)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

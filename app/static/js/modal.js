@@ -174,3 +174,56 @@ $('#signInForm').submit(function(e) {
 
 
 });
+
+
+// AddtoCart and AddtoWishlist functions for item-card.html
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('.heart-button').forEach(button => {
+    button.addEventListener('click', function() {
+      let itemCard = this.closest('.item-card');
+      let productId = itemCard.getAttribute('data-product-id');
+      let userId = itemCard.getAttribute('data-user-id');
+
+      // Toggle heart symbol
+      if (this.textContent === '❤') {
+        this.textContent = '🤍'; // Change to empty heart
+        removeFromWishlist(productId, userId);
+      } else {
+        this.textContent = '❤'; // Change to filled heart
+        addToWishlist(productId, userId);
+      }
+    });
+  });
+
+  function addToWishlist(productId, userId) {
+    fetch('/add_to_wishlist', {
+      method: 'POST',
+      body: JSON.stringify({ product_id: productId, user_id: userId }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  }
+
+  function removeFromWishlist(productId, userId) {
+    fetch('/remove_from_wishlist', {
+      method: 'POST',
+      body: JSON.stringify({ product_id: productId, user_id: userId }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  }
+});
+
+
+
+// Add to cart and Add to wishlist functions for product.html
+
