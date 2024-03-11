@@ -1487,3 +1487,17 @@ a {
 #wishlistItems li:hover {
     background-color: #e0e0e0;
 }
+
+
+.wishlist-item {
+    display: flex;
+    align-items: center;
+}
+
+.wishlist-item a {
+    flex: 1;
+}
+
+.delete-btn {
+    margin-left: 10px;
+}

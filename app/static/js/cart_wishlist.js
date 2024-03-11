@@ -88,7 +88,16 @@ $(document).ready(function () {
             
             // Iterate over the wishlist items and append them to the UI
             response.forEach(function(item) {
-                $('#wishlistItems').append(`<li><a href="/product_details/${item.id}">${item.name} - ${item.price}</a></li>`);
+                // Create a list item with the product details and a delete button
+                var listItem = $('<li>').append(
+                    $('<div>').addClass('wishlist-item').append(
+                        $('<a>').attr('href', '/product_details/' + item.id).text(item.name + ' - ' + item.price),
+                        $('<button>').addClass('delete-btn').text('Delete').click(function() {
+                            deleteWishlistItem(item.id);
+                        })
+                    )
+                );
+                $('#wishlistItems').append(listItem);
             });
         },
         error: function(xhr, status, error) {
@@ -97,6 +106,20 @@ $(document).ready(function () {
     });
   }
 
-  fetchWishlist();
+function deleteWishlistItem(itemId) {
+    $.ajax({
+        url: '/remove_wishlist_item/' + itemId,
+        type: 'DELETE',
+        success: function(response) {
+            fetchWishlist(); // Refresh the wishlist after deletion
+        },
+        error: function(xhr, status, error) {
+            console.error('Error deleting wishlist item:', error);
+        }
+    });
+  }
+
+fetchWishlist();
+
 
 });

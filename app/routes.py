@@ -293,6 +293,19 @@ def get_wishlist_items():
             })
     return jsonify(items)
 
+@app.route('/remove_wishlist_item/<int:item_id>', methods=['DELETE'])
+@login_required
+def remove_wishlist_item(item_id):
+    user_id = current_user.id
+    wishlist_item = Wishlist.query.filter_by(user_id=user_id, product_id=item_id).first()
+    if wishlist_item:
+        db.session.delete(wishlist_item)
+        db.session.commit()
+        return jsonify({'message': 'Wishlist item removed successfully'})
+    else:
+        return jsonify({'message': 'Wishlist item not found'}), 404
+
+
 # @app.route('/api/products')
 # def api_products():
 #     products = Product.query.all()
