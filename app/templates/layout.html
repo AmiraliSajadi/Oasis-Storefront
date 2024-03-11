@@ -23,80 +23,114 @@
   <!-- Header -->
   <header class="header" data-header>
     <div class="container">
-        <!-- Logo -->
-        <a href="{{url_for('home')}}" class="logo">
-            <img src="../static/img/logo.png" alt="Oasis logo" width="130" height="11">
-        </a>
 
-        <!-- Dropdown Menu for Categories -->
-        <div class="dropdown">
-            <button class="dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categories
-            </button>
-            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-                <a class="dropdown-item" href="#">Toys</a>
-                <a class="dropdown-item" href="#">Sports</a>
-                <a class="dropdown-item" href="#">Clothing</a>
-                <a class="dropdown-item" href="#">Electronics</a>
-                <a class="dropdown-item" href="#">Home & Garden</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{url_for('products')}}">All Products</a>
-            </div>
-        </div>
+      <div class="overlay" data-overlay></div>
 
-        <!-- Search Form -->
-        <div class="header-search" id="searchForm">
-            <form action="{{ url_for('search') }}" method="POST">
-                <input type="text" name="search" placeholder="Search Product..." class="input-field">
-                <button class="search-btn" aria-label="Search" type="submit">
-                    <i class='fa fa-search'></i>
-                </button>
-            </form>
-        </div>
+      <a href="{{url_for('home')}}" class="logo">
+        <img src="../static/img/logo.png" alt="Oasis logo" width="130" height="11">
+      </a>
 
-        <!-- Sign In/Log Out Button -->
-        {% if current_user.is_authenticated %}
-        <a href="{{url_for('logout')}}" class="header-action-btn">
-            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-            <a href="{{ url_for('user_settings') }}" class="header-action-label">{{ current_user.username }}</a>
-        </a>
-        <a href="{{url_for('logout')}}" class="header-action-btn">
-            <ion-icon name="log-out-outline" aria-hidden="true"></ion-icon>
-            <p class="header-action-label">Log Out</p>
-        </a>
-        {% else %}
+
+      <div class="header-search" id="searchForm">
+        <form action="{{ url_for('search') }}" method="POST">
+
+          <input type="text" name="search" placeholder="Search Product..." class="input-field">
+
+          <button class="search-btn" aria-label="Search" type="submit">
+            <i class='fa fa-search'></i>
+          </button>
+        </form>
+
+
+      </div>
+
+      <div class="header-actions">
+
         <button class="header-action-btn" id="signInLink">
-            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-            <p class="header-action-label">Sign in</p>
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Sign in</p>
         </button>
-        {% endif %}
 
-        <!-- Sell Button -->
-        {% if current_user.is_authenticated %}
-        <a href="{{url_for('sell')}}" class="header-action-btn">
-            <ion-icon name="add-circle-outline" aria-hidden="true"></ion-icon>
-            <p class="header-action-label">Sell</p>
-        </a>
-        {% endif %}
+        <button class="header-action-btn">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
 
-        <!-- Cart Button -->
-        {% if current_user.is_authenticated %}
-        <button class="header-action-btn" id="cartButton">
-            <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
-            <p class="header-action-label">Cart</p>
+          <p class="header-action-label">Search</p>
         </button>
-        {% endif %}
 
-        <!-- Wishlist Button -->
         {% if current_user.is_authenticated %}
+        <button class="header-action-btn" data-toggle="modal" data-target="#cartModal" id="cartButton">
+          <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
+          <p class="header-action-label">Cart</p>
+        </button>
+
         <button class="header-action-btn" id="wishlistButton">
-            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-            <p class="header-action-label">Wishlist</p>
+          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+
+          <p class="header-action-label">Wishlist</p>
+
+          <!-- <div class="btn-badge" aria-hidden="true">2</div> -->
         </button>
         {% endif %}
-    </div>
-</header>
 
+      </div>
+
+      <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+
+          <a href="{{url_for('home')}}" class="logo">
+            <img src="../static/img/logo.png" alt="Casmart logo" width="130" height="31">
+          </a>
+
+          <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <ul class="navbar-list">
+          <li>
+            <a href="{{url_for('home')}}" class="navbar-link">Home</a>
+          </li>
+          <li>
+            <a href="{{url_for('products')}}" class="navbar-link">Shop</a>
+          </li>
+          <li>
+            <a href="{{url_for('about')}}" class="navbar-link">About</a>
+          </li>
+          <!-- <li>
+            <a href="{{url_for('contact')}}" class="navbar-link">Contact</a>
+          </li> -->
+          {% if current_user.is_authenticated%}
+          <li>
+            <a href="{{url_for('sell')}}" class="navbar-link">Sell</a>
+          </li>
+          <li>
+            <a href="{{url_for('logout')}}" class="navbar-link">Log out</a>
+          </li>
+          <li>
+            <a href="{{url_for('userProfile')}}" class="navbar-link">User</a>
+          </li>
+          {%else%}
+          <li>
+            <a href="{{url_for('login')}}" class="navbar-link">Login</a>
+          </li>
+          <li>
+            <a href="{{url_for('register')}}" class="navbar-link">Register</a>
+          </li>
+          {%endif%}
+        </ul>
+
+      </nav>
+
+    </div>
+  </header>
 
   <main role="main" class="main-container">
     {%block main_content%}{%endblock%}
@@ -152,100 +186,83 @@
   </div>
 
 
-<!-- Sign In Modal -->
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+  <!-- Sign In Modal -->
+  <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <!-- Sign In Form -->
-              <form id="signInForm">
-                  <div class="form-group">
-                      <label for="signInEmail">Email address</label>
-                      <input type="email" class="form-control" id="signInEmail" name="Email" placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                      <label for="signInPassword">Password</label>
-                      <input type="password" class="form-control" id="signInPassword" name="password" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Sign In</button>
-              </form>
-              <p class="mt-3">New user? <a href="#" id="showSignUp">Sign up</a></p>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Sign In Form -->
+          <form id="signInForm">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+          <p class="mt-3">New user? <a href="#" id="showSignUp">Sign up</a></p>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 
-<!-- Sign Up Modal -->
-<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <!-- Sign Up Form -->
-              <form id="signUpForm">
-                  <div class="form-group">
-                      <label for="signUpEmail">Email address</label>
-                      <input type="email" class="form-control" id="signUpEmail" name="Email" placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                      <label for="signUpUsername">Username</label>
-                      <input type="text" class="form-control" id="signUpUsername" name="Username" placeholder="Username">
-                  </div>
-                  <div class="form-group">
-                      <label for="signUpPassword">Password</label>
-                      <input type="password" class="form-control" id="signUpPassword" name="password" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                      <label for="signUpConfirmPassword">Confirm Password</label>
-                      <input type="password" class="form-control" id="signUpConfirmPassword" name="confirmPassword" placeholder="Confirm Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Sign Up</button>
-              </form>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Sign Up Form -->
+          <form id="signUpForm">
+            <div class="form-group">
+              <label for="emailSignUp">Email address</label>
+              <input type="email" class="form-control" id="emailSignUp" aria-describedby="emailHelp"
+                placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="passwordSignUp">Password</label>
+              <input type="password" class="form-control" id="passwordSignUp" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+        </div>
       </div>
+    </div>
   </div>
-</div>
-
-
 
   <div id="cartSidebar" class="sidebar">
     <!-- Content for the cart sidebar -->
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-      iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-      Wishlist Placeholder Paragraph</p>
+    <p>Cart Placeholder Paragraph</p>
   </div>
 
   <div id="wishlistSidebar" class="sidebar">
     <!-- Content for the wishlist sidebar -->
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
-    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
     iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
@@ -262,7 +279,9 @@
     iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
     iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
-    Wishlist Placeholder Paragraph</p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium recusandae impedit dolore deleniti, explicabo
+    iste praesentium quibusdam. Sint, eaque ullam? Sequi aspernatur, harum repellat quod ut expedita ducimus cum alias.
+    <p>Wishlist Placeholder Paragraph</p>
   </div>
 
   <!-- </article> -->
