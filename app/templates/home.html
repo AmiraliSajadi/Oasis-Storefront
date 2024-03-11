@@ -8,23 +8,23 @@
 
 
 <!-- <main> -->
-<artic>
+<article>
   <div class="slideshow-container">
     <div class="mySlides">
       <img src="../static/img/img-slider/960.jpg" style="width:100%; height:750px;">
-      <div class="text">Dell Laptop</div>
+      <!-- <div class="text">Dell Laptop</div> -->
     </div>
     <div class="mySlides">
       <img src="../static/img/img-slider/ipad.png" style="width:100%; height:750px;">
-      <div class="text">Apple Ipad</div>
+      <!-- <div class="text">Apple Ipad</div> -->
     </div>
     <div class="mySlides">
       <img src="../static/img/img-slider/Top-games-and-Immortal-headphones.jpg" style="width:100%; height:750px;">
-      <div class="text">Headphones</div>
+      <!-- <div class="text">Headphones</div> -->
     </div>
     <div class="mySlides">
       <img src="../static/img/img-slider/watch.png" style="width:100%; height:750px;">
-      <div class="text">Apple Watch</div>
+      <!-- <div class="text">Apple Watch</div> -->
     </div>
 
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -33,13 +33,13 @@
 
   </div>
   <br>
-  <div style="text-align:center">
+  <div class="dot-container" style="text-align:center">
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
     <span class="dot" onclick="currentSlide(4)"></span>
   </div>
-</artic
+</article>
 <!-- </main> -->
 <!-- ------------------ -->
 <!-- Shop by Categories -->
@@ -136,6 +136,7 @@
       --text-color: 26, 32, 36;
       --section-background: 255, 255, 255;
     }
+
   </style>
 
   <section class=" ">
@@ -155,13 +156,13 @@
               <article class="card__article">
 
                 <video class="product-video" muted loop>
-                  <source src="../static/img/BestSellerVid/1.mp4" type="video/mp4">
+                  <source src="../static/img/BestSellerVid/iphone.mov" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
                 <div class="card__data">
-                  <span class="card__description">Smartwatch, Apple</span>
-                  <h2 class="card__title">Smartwatch</h2>
-                  <a href="#" class="card__button">$78</a>
+                  <span class="card__description">Apple</span>
+                  <h2 class="card__title">iPhone 14</h2>
+                  <a href="#" class="card__button">$800</a>
                 </div>
               </article>
             </div>
@@ -171,12 +172,42 @@
 
                 <video class="product-video" muted loop>
 
-                  <source src="../static/img/BestSellerVid/3.mp4" type="video/mp4">
+                  <source src="../static/img/BestSellerVid/smartwatch.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
                 <div class="card__data">
-                  <span class="card__description">Smartwatch, Apple</span>
-                  <h2 class="card__title">Smartwatch</h2>
+                  <span class="card__description">Smartwatch</span>
+                  <h2 class="card__title">Amazfit</h2>
+                  <a href="#" class="card__button">$58</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card" id="smartwatches">
+              <article class="card__article">
+
+                <video class="product-video" muted loop>
+                  <source src="../static/img/BestSellerVid/macbook.mov" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="card__data">
+                  <span class="card__description">Apple</span>
+                  <h2 class="card__title">MacBook Pro</h2>
+                  <a href="#" class="card__button">$1600</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card" id="smartwatches">
+              <article class="card__article">
+
+                <video class="product-video" muted loop>
+                  <source src="../static/img/BestSellerVid/Earpods.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="card__data">
+                  <span class="card__description">Samsung</span>
+                  <h2 class="card__title">Galaxy Buds 2</h2>
                   <a href="#" class="card__button">$78</a>
                 </div>
               </article>
@@ -186,31 +217,17 @@
               <article class="card__article">
 
                 <video class="product-video" muted loop>
-                  <source src="../static/img/BestSellerVid/5.mp4" type="video/mp4">
+                  <source src="../static/img/BestSellerVid/vision.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
                 <div class="card__data">
-                  <span class="card__description">Smartwatch, Apple</span>
-                  <h2 class="card__title">Smartwatch</h2>
-                  <a href="#" class="card__button">$78</a>
+                  <span class="card__description">Apple</span>
+                  <h2 class="card__title">Vision Pro</h2>
+                  <a href="#" class="card__button">$3500</a>
                 </div>
               </article>
             </div>
 
-            <div class="card" id="smartwatches">
-              <article class="card__article">
-
-                <video class="product-video" muted loop>
-                  <source src="../static/img/BestSellerVid/6.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="card__data">
-                  <span class="card__description">Smartwatch, Apple</span>
-                  <h2 class="card__title">Smartwatch</h2>
-                  <a href="#" class="card__button">$78</a>
-                </div>
-              </article>
-            </div>
           </div>
         </div>
 
@@ -232,6 +249,9 @@
       --heading-color: 26, 32, 36;
       --text-color: 26, 32, 36;
       --section-background: 255, 255, 255;
+    }
+    .shopifycustom-html{
+      padding-top: 30px;
     }
   </style>
 
