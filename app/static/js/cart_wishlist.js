@@ -2,6 +2,7 @@ $(document).ready(function () {
 
   $('#cartButton').click(function() {
       $('#cartSidebar').toggleClass('active');
+      fetchCart();
     });
 
   $('#wishlistButton').click(function() {
@@ -119,7 +120,86 @@ function deleteWishlistItem(itemId) {
     });
   }
 
-fetchWishlist();
+// Function to fetch cart items
+function fetchCart() {
+  $.ajax({
+      url: '/get_cart_items',
+      type: 'GET',
+      success: function(response) {
+          // Clear the existing cart items
+          $('#cartItems').empty();
+          
+          // Iterate over the cart items and append them to the UI
+          response.forEach(function(item) {
+              $('#cartItems').append(`<li>${item.name} - $${item.price} - Quantity: ${item.quantity} <button class="increaseBtn" data-productid="${item.id}">+</button> <button class="decreaseBtn" data-productid="${item.id}">-</button> <button class="deleteBtn" data-productid="${item.id}">Delete</button></li>`);
+          });
+          
+          // Calculate and update the total
+          let total = response.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+          $('#cartTotal').text(total.toFixed(2));
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching cart items:', error);
+      }
+  });
+}
 
+// Function to handle removing an item from the cart
+function removeFromCart(productId) {
+  $.ajax({
+      url: `/remove_cart_item/${productId}`,
+      type: 'DELETE',
+      success: function(response) {
+          // Refresh the cart items after removing
+          fetchCart();
+      },
+      error: function(xhr, status, error) {
+          console.error('Error removing item from cart:', error);
+      }
+  });
+}
+
+$('#cartItems').on('click', '.increaseBtn', function() {
+  let productId = $(this).data('productid');
+  addToCart(productId);
+  fetchCart();
+});
+
+// Event listener for decrease button
+$('#cartItems').on('click', '.decreaseBtn', function() {
+  let productId = $(this).data('productid');
+  updateQuantity(productId, -1); // Decrease the quantity by 1
+});
+
+// Event listener for delete button
+$('#cartItems').on('click', '.deleteBtn', function() {
+  let productId = $(this).data('productid');
+  removeFromCart(productId);
+});
+
+// Function to update quantity
+function updateQuantity(productId, change) {
+  $.ajax({
+      url: '/update_cart_quantity',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ productId: productId, change: change }), // Pass the product ID and the change in quantity
+      success: function(response) {
+          fetchCart(); // Fetch updated cart items
+      },
+      error: function(xhr, status, error) {
+          console.error('Error updating quantity:', error);
+      }
+  });
+}
+
+// Event listener for finalize transaction button
+$('#finalizeTransactionBtn').on('click', function() {
+  alert("Transaction Done")
+  // Implement logic to finalize transaction (update product numbers, etc.)
+});
+
+fetchWishlist();
+fetchCart();
 
 });
