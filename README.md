@@ -39,6 +39,6 @@ python run.py
 ## Some Notable Features:
 - Users can create accounts.
 - view all the products up for sale.
-- Add products to their wishlists.
-- Add products to their carts and make purchases.
-- Put up products for sale.
+- Add products to their wishlists (*Registered* users only).
+- Add products to their carts and make purchases (*Registered* users only).
+- Put up products for sale (*Registered* users only).
