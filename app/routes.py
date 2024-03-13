@@ -303,7 +303,7 @@ def upload_item():
         db.session.commit()
 
         flash('Item uploaded successfully', 'success')
-        return redirect(url_for('userSetting'))
+        return redirect(url_for('user_settings'))
         
 
 

@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         this.textContent = '❤'; // Change to filled heart
         addToWishlist(productId, userId);
+        alert("message", "Item added to your wishlist.")
       }
     });
   });
